@@ -74,8 +74,8 @@ const Programs = () => {
 
     const programs = [
         {
-            title: "AI Fellowship",
-            description: "An intensive 6-month fellowship for top students and professionals in J&K.",
+            title: "Internships",
+            description: "An intensive 6-month internship program for top students and professionals in J&K.",
             highlights: ["Industry Mentorship", "Hands-on Projects", "Career Support"],
             icon: <Users className="w-8 h-8 text-purple-400" />,
             color: "from-purple-500/10 to-transparent",

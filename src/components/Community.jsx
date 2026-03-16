@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { MessageSquare, Github, Twitter, ExternalLink } from 'lucide-react';
+import { Linkedin, Github, Instagram, ExternalLink } from 'lucide-react';
 
-const CommunityCard = ({ href, icon: Icon, title, description, color }) => {
+const CommunityCard = ({ href, icon: Icon, title, description, color, buttonText }) => {
     const x = useMotionValue(0);
     const y = useMotionValue(0);
 
@@ -32,6 +32,8 @@ const CommunityCard = ({ href, icon: Icon, title, description, color }) => {
     return (
         <motion.a
             href={href}
+            target="_blank"
+            rel="noopener noreferrer"
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             style={{
@@ -59,7 +61,7 @@ const CommunityCard = ({ href, icon: Icon, title, description, color }) => {
                     {description}
                 </p>
                 <div className="mt-auto px-6 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-bold text-white uppercase tracking-widest group-hover:bg-white group-hover:text-black transition-all">
-                    Connect Now
+                    {buttonText || "Connect Now"}
                 </div>
             </div>
         </motion.a>
@@ -94,25 +96,31 @@ const Community = () => {
 
                 <div className="flex flex-wrap items-stretch justify-center gap-8 perspective-1000">
                     <CommunityCard
-                        href="#"
-                        icon={MessageSquare}
-                        title="Discord Server"
+                        href="https://www.linkedin.com/in/vidyaraaai/"
+                        target="_blank" 
+                        icon={Linkedin}
+                        title="LinkedIn"
                         color="bg-indigo-500"
                         description="Real-time discussions, project collaboration, and community events."
+                        buttonText="Connect"
                     />
                     <CommunityCard
-                        href="#"
+                        href="https://github.com/Vidyaraa"
+                        target="_blank" 
                         icon={Github}
                         title="GitHub Org"
                         color="bg-white"
                         description="Open source projects, research papers, and technical contributions."
+                        buttonText="View Code"
                     />
                     <CommunityCard
-                        href="#"
-                        icon={Twitter}
-                        title="Follow on X"
-                        color="bg-blue-400"
+                        href="https://www.instagram.com/vidyaraa_ai/"
+                        target="_blank" 
+                        icon={Instagram}
+                        title="Follow on Instagram"
+                        color="bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500"
                         description="Stay updated with the latest AI news and breakthroughs from J&K."
+                        buttonText="Follow"
                     />
                 </div>
             </div>

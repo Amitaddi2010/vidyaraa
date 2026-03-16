@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Linkedin, Twitter, User } from 'lucide-react';
+import { Linkedin, Instagram, User } from 'lucide-react';
 import TextReveal from './TextReveal';
 import GradientMesh from './GradientMesh';
 
@@ -10,19 +10,31 @@ const Team = () => {
             name: "Rahul Sharma",
             role: "CEO",
             bio: "Leading the strategic vision and growth of the Vidyaraa AI Initiative across J&K.",
-            image: "/team/rahul.jpg"
+            image: "/team/rahul.jpg",
+            social: {
+                linkedin: "https://www.linkedin.com/in/rahul-sharma15/",
+                instagram: "https://www.instagram.com/rahul._sharma_31/"
+            }
         },
         {
             name: "Amit Raj Saraswat",
             role: "President",
             bio: "Driving academic partnerships and fostering a culture of continuous AI innovation.",
-            image: "/team/amit.jpg"
+            image: "/team/amit.jpg",
+            social: {
+                linkedin: "https://www.linkedin.com/in/amitrajsaraswat/",
+                instagram: "https://www.instagram.com/aamit.ai/"
+            }
         },
         {
             name: "Abhay Khajuria",
             role: "COO",
             bio: "Overseeing operations, execution, and scaling the real-world impact of our programs.",
-            image: "/team/abhay.jpg"
+            image: "/team/abhay.jpg",
+            social: {
+                linkedin: "https://www.linkedin.com/in/abhay-khajuria-14772b1a1/",
+                instagram: "https://www.instagram.com/abhay_khajuria/"
+            }
         }
     ];
 
@@ -98,11 +110,21 @@ const Team = () => {
 
                                 {/* Social Links */}
                                 <div className="mt-auto flex items-center justify-center gap-4 relative z-10">
-                                    <a href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-[#777] hover:text-white hover:bg-white/10 hover:border-white/30 transition-all">
+                                    <a 
+                                        href={member.social.linkedin} 
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                        className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-[#777] hover:text-white hover:bg-white/10 hover:border-white/30 transition-all"
+                                    >
                                         <Linkedin className="w-4 h-4" />
                                     </a>
-                                    <a href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-[#777] hover:text-white hover:bg-white/10 hover:border-white/30 transition-all">
-                                        <Twitter className="w-4 h-4" />
+                                    <a 
+                                        href={member.social.instagram} 
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                        className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-[#777] hover:text-white hover:bg-white/10 hover:border-white/30 transition-all"
+                                    >
+                                        <Instagram className="w-4 h-4" />
                                     </a>
                                 </div>
 

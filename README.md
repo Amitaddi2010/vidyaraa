@@ -21,7 +21,7 @@ This front-end application features a world-class, immersive UI/UX built with Re
     *   Parallax depth layering in the hero section.
     *   Interactive magnetic hover cards and layout transitions.
 *   **Performance Optimized:** Fully responsive across all devices, optimized for standard Lighthouse metrics, and pre-configured for static deployment.
-*   **Production Ready:** Complete with SEO meta tags (OpenGraph, Twitter Cards), `robots.txt`, XML Sitemaps, and a Web App Manifest.
+*   **Production Ready:** Complete with SEO meta tags (OpenGraph, Instagram Cards), `robots.txt`, XML Sitemaps, and a Web App Manifest.
 
 ## 🛠️ Technology Stack
 

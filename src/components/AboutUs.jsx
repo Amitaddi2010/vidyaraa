@@ -1,23 +1,24 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Rocket, Brain, Handshake, Target, Microscope, Globe, BookOpen, Eye, MessageSquare, Bot, Settings, Stethoscope } from 'lucide-react';
 
 const AboutUs = () => {
     const features = [
-        { icon: "🚀", title: "AI Education" },
-        { icon: "🧠", title: "Research Collaboration" },
-        { icon: "🤝", title: "Industry Partnerships" },
-        { icon: "🎯", title: "Career Development" },
-        { icon: "🔬", title: "Innovation Hub" },
-        { icon: "🌍", title: "Regional Impact" }
+        { icon: <Rocket className="w-5 h-5 text-purple-400" />, title: "AI Education" },
+        { icon: <Brain className="w-5 h-5 text-blue-400" />, title: "Research Collaboration" },
+        { icon: <Handshake className="w-5 h-5 text-green-400" />, title: "Industry Partnerships" },
+        { icon: <Target className="w-5 h-5 text-red-400" />, title: "Career Development" },
+        { icon: <Microscope className="w-5 h-5 text-yellow-400" />, title: "Innovation Hub" },
+        { icon: <Globe className="w-5 h-5 text-cyan-400" />, title: "Regional Impact" }
     ];
 
     const domains = [
-        { icon: "📚", title: "Machine Learning" },
-        { icon: "👁️", title: "Computer Vision" },
-        { icon: "💬", title: "Natural Language Processing" },
-        { icon: "🤖", title: "Generative AI" },
-        { icon: "⚙️", title: "MLOps" },
-        { icon: "🏥", title: "Healthcare AI" }
+        { icon: <BookOpen className="w-6 h-6 text-purple-400" />, title: "Machine Learning" },
+        { icon: <Eye className="w-6 h-6 text-blue-400" />, title: "Computer Vision" },
+        { icon: <MessageSquare className="w-6 h-6 text-green-400" />, title: "Natural Language Processing" },
+        { icon: <Bot className="w-6 h-6 text-red-400" />, title: "Generative AI" },
+        { icon: <Settings className="w-6 h-6 text-yellow-400" />, title: "MLOps" },
+        { icon: <Stethoscope className="w-6 h-6 text-cyan-400" />, title: "Healthcare AI" }
     ];
 
     return (
@@ -86,7 +87,7 @@ const AboutUs = () => {
                         <div className="grid sm:grid-cols-2 gap-4">
                             {features.map((feat, idx) => (
                                 <div key={idx} className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/[0.04]">
-                                    <span className="text-xl">{feat.icon}</span>
+                                    <div className="w-8 h-8 flex items-center justify-center">{feat.icon}</div>
                                     <span className="text-sm font-semibold text-[#e2e8f0]">{feat.title}</span>
                                 </div>
                             ))}
@@ -117,7 +118,7 @@ const AboutUs = () => {
                                     key={idx}
                                     className="flex items-center gap-4 px-8 py-5 rounded-3xl bg-[#0a0a0a] border border-white/10 hover:border-white/20 hover:bg-[#111] transition-all cursor-default shrink-0"
                                 >
-                                    <span className="text-2xl">{domain.icon}</span>
+                                    <div className="w-8 h-8 flex items-center justify-center">{domain.icon}</div>
                                     <span className="text-base font-bold tracking-wide text-white">{domain.title}</span>
                                 </div>
                             ))}

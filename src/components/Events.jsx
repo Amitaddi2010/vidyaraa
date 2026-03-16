@@ -1,32 +1,33 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, MapPin, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import TextReveal from './TextReveal';
 import GradientMesh from './GradientMesh';
 
 const Events = () => {
     const events = [
         {
-            type: "Hackathon",
-            title: "J&K AI Summit Hackathon",
-            date: "Oct 15 - 17, 2026",
-            location: "IIT Jammu Campus",
-            status: "Upcoming",
-            active: true
-        },
-        {
             type: "Workshop",
-            title: "Introduction to Large Language Models",
-            date: "Nov 02, 2026",
-            location: "University of Jammu",
-            status: "Registering",
+            title: "One Day Workshop on AI Tools",
+            date: "March 18, 2026",
+            location: "Bhaderwah Campus",
+            status: "Registered",
             active: false
         },
         {
-            type: "Meetup",
-            title: "Srinagar AI Developer Connect",
-            date: "Nov 20, 2026",
-            location: "NIT Srinagar",
+            type: "Workshop",
+            title: "One DayWorkshop on Google AI Tools",
+            date: "March 28, 2026",
+            location: "University of Jammu",
+            status: "Opening Registration Soon",
+            active: true
+        },
+        {
+            type: "Event",
+            title: "Something BIG",
+            date: "April",
+            location: "Multiple Locations",
             status: "Planning",
             active: false
         }
@@ -103,9 +104,12 @@ const Events = () => {
                                     </div>
                                 </div>
 
-                                <button className="relative z-10 w-full py-4 rounded-xl bg-white/5 hover:bg-white text-white hover:text-black font-bold transition-colors border border-white/10 uppercase tracking-widest text-xs">
-                                    Register Interest
-                                </button>
+                                <Link 
+                                    to="/contact" 
+                                    className="relative z-10 w-full py-4 rounded-xl bg-white/5 hover:bg-white text-white hover:text-black font-bold transition-colors border border-white/10 uppercase tracking-widest text-xs block text-center"
+                                >
+                                    Contact for more details
+                                </Link>
                             </div>
                         </motion.div>
                     ))}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { BrainCircuit, Github, Twitter, MessageSquare, Mail, Globe, ArrowUpRight } from 'lucide-react';
+import { BrainCircuit, Github, Instagram, Linkedin, Mail, Globe, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -73,13 +73,15 @@ const Footer = () => {
                                 <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-white/30 mb-8 md:text-right">Join the Network</h4>
                                 <div className="flex gap-4 mb-8">
                                     {[
-                                        { icon: <Twitter />, label: "Twitter" },
-                                        { icon: <Github />, label: "GitHub" },
-                                        { icon: <MessageSquare />, label: "Discord" }
+                                        { icon: <Instagram />, label: "Instagram", href: "https://www.instagram.com/vidyaraa_ai/" },
+                                        { icon: <Github />, label: "GitHub", href: "https://github.com/Vidyaraa" },
+                                        { icon: <Linkedin />, label: "LinkedIn", href: "https://www.linkedin.com/in/vidyaraaai/" }
                                     ].map((social, i) => (
                                         <motion.a
                                             key={i}
-                                            href="#"
+                                            href={social.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             whileHover={{ y: -8, scale: 1.1 }}
                                             className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:border-purple-500/50 hover:bg-purple-500/10 transition-all duration-300 shadow-lg"
                                         >

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Shield, Lock, Eye, FileText } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const PrivacyPolicy = () => {
     useEffect(() => {
@@ -83,9 +84,12 @@ const PrivacyPolicy = () => {
                         <p className="text-slate-400 text-sm mb-6">
                             If you have any questions about this Privacy Policy or our data practices, please reach out to our team.
                         </p>
-                        <button className="px-6 py-2.5 rounded-full bg-purple-600 hover:bg-purple-500 text-white text-sm font-semibold transition-all">
+                        <Link 
+                            to="/contact"
+                            className="px-6 py-2.5 rounded-full bg-purple-600 hover:bg-purple-500 text-white text-sm font-semibold transition-all inline-block"
+                        >
                             Contact Us
-                        </button>
+                        </Link>
                     </section>
                 </motion.div>
             </div>
