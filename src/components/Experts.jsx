@@ -12,11 +12,39 @@ const Experts = () => {
             portfolio: "https://vinodsharma.netlify.app/"
         },
         {
-            name: "Dr. Neeraj Kumar",
-            affiliation: "Dept of CS & IT, Bhaderwah Campus, University of Jammu",
-            expertise: ["Deep Learning", "Neural Networks", "Pattern Recognition", "Machine Learning", "Research"],
-            image: "/experts/Neeraj Kumar.jpg",
-            portfolio: "https://admin.jammuuniversity.ac.in/JUProfiles/profilepage.aspx?id=135"
+            name: "Prof. Mansaf Alam",
+            affiliation: "Department of Computer Science & IT,  Jamia Millia Islamia",
+            expertise: ["Artificial Intelligence", "Big Data Analytics", "Machine Learning and Deep Learning", "Cloud Computing", "Data Mining"],
+            image: "/experts/Mansaf.png",
+            portfolio: "https://www.jmi.ac.in/ACADEMICS/Departments/Department-Of-Computer-Science/Faculty-Members/1891/Mansaf_Alam"
+        },
+        {
+            name: "Prof. Jaswinder Singh",
+            affiliation: "Department of Computer Science & Engineering, Punjabi University, Patiala",
+            expertise: ["Cyber Security", "Machine Learning", "Computer Vision", "Malware Analysis","Computer Networks","Mobile Ad-Hoc Networks","Cloud Computing"],
+            image: "/experts/Jaswinder.png",
+            portfolio: "https://www.linkedin.com/in/dr-jaswinder-singh-b4280121a/"
+        },
+        {
+            name: "Dr. Kuldip Raj",
+            affiliation: "School of Mathematics,Shri Mata Vaishno Devi University ",
+            expertise: ["Sequence Spaces", "Summability Theory", "Matrix Transformations", "Malware Analysis","Statistical Convergence"],
+            image: "/experts/Kuldip.png",
+            portfolio: "https://smvdu.ac.in/employee/dr-kuldip-raj/"
+        },
+        {
+            name: "Prof. Vikram Singh",
+            affiliation: "Computer Science, Ch. Devi Lal University, Sirsa",
+            expertise: ["Cybersecurity", "Data Mining", "Machine Learning", "Operating Systems","System Simulation"],
+            image: "/experts/Vikram.png",
+            portfolio: "https://www.linkedin.com/in/vikram-singh-941a7a182/"
+        },
+        {
+            name: "Dr. Ajay Abrol",
+            affiliation: "Department of Electronics and Communication, GCET Jammu",
+            expertise: ["Artificial Neural Networks", "Digital signal processing", "Embedded systems"],
+            image: "/experts/AjayAbrol.png",
+            portfolio: "https://www.linkedin.com/in/dr-ajay-abrol-35a33b139/"
         }
        
     ];
@@ -91,13 +119,13 @@ const Experts = () => {
                         </p>
                         <div className="mt-4 flex items-center justify-center gap-2 text-sm text-[#888]">
                             <div className="w-2 h-2 rounded-full bg-[#6d28d9] animate-pulse"></div>
-                            <span>2 Core Advisors</span>
+                            <span>3 Core Advisors</span>
                         </div>
                     </motion.div>
 
-                    {/* Render National Experts in a centered 2-column layout */}
-                    <div className="max-w-4xl mx-auto">
-                        <div className="grid md:grid-cols-2 gap-8">
+                    {/* Render National Experts in a centered 3-column layout */}
+                    <div className="max-w-7xl mx-auto">
+                        <div className="grid md:grid-cols-3 gap-8">
                             {nationalExperts.map((expert, idx) => (
                                 <motion.a
                                     key={idx}
