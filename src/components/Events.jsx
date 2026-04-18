@@ -18,7 +18,7 @@ const Events = () => {
         {
             type: "Workshop",
             title: "One DayWorkshop on Google AI Tools",
-            date: "March 28, 2026",
+            date: "April 11, 2026",
             location: "University of Jammu",
             status: "Opening Registration Soon",
             active: true

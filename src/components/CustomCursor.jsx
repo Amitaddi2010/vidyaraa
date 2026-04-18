@@ -18,6 +18,11 @@ const CustomCursor = () => {
 
         const handleHoverStart = (e) => {
             const target = e.target;
+            if (!(target instanceof Element)) {
+                setIsHovered(false);
+                return;
+            }
+
             const isInteractive =
                 target.tagName === 'BUTTON' ||
                 target.tagName === 'A' ||
@@ -40,7 +45,7 @@ const CustomCursor = () => {
             window.removeEventListener('mouseover', handleHoverStart);
             window.removeEventListener('mouseout', handleHoverEnd);
         };
-    }, []);
+    }, [cursorX, cursorY]);
 
     return (
         <>

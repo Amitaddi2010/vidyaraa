@@ -117,10 +117,6 @@ const Experts = () => {
                         <p className="text-[#777] max-w-2xl mx-auto">
                             Leading AI professionals from University of Jammu supporting Vidyaraa's educational mission and research initiatives.
                         </p>
-                        <div className="mt-4 flex items-center justify-center gap-2 text-sm text-[#888]">
-                            <div className="w-2 h-2 rounded-full bg-[#6d28d9] animate-pulse"></div>
-                            <span>3 Core Advisors</span>
-                        </div>
                     </motion.div>
 
                     {/* Render National Experts in a centered 3-column layout */}
