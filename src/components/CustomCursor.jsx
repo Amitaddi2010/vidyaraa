@@ -3,12 +3,25 @@ import { motion, useSpring, useMotionValue } from 'framer-motion';
 
 const CustomCursor = () => {
     const [isHovered, setIsHovered] = useState(false);
+    const [isTouchDevice, setIsTouchDevice] = useState(true); // Default to true to prevent flash
     const cursorX = useMotionValue(-100);
     const cursorY = useMotionValue(-100);
 
     const springConfig = { damping: 25, stiffness: 250 };
     const cursorXSpring = useSpring(cursorX, springConfig);
     const cursorYSpring = useSpring(cursorY, springConfig);
+
+    // Detect touch device on mount
+    useEffect(() => {
+        const checkTouchDevice = () => {
+            const isTouch =
+                'ontouchstart' in window ||
+                navigator.maxTouchPoints > 0 ||
+                window.matchMedia('(pointer: coarse)').matches;
+            setIsTouchDevice(isTouch);
+        };
+        checkTouchDevice();
+    }, []);
 
     useEffect(() => {
         const moveCursor = (e) => {
@@ -46,6 +59,9 @@ const CustomCursor = () => {
             window.removeEventListener('mouseout', handleHoverEnd);
         };
     }, [cursorX, cursorY]);
+
+    // Don't render on touch devices
+    if (isTouchDevice) return null;
 
     return (
         <>

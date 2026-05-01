@@ -84,7 +84,7 @@ const Mission = () => {
     ];
 
     return (
-        <section id="mission" className="py-32 bg-[#020202] relative border-t border-white/[0.02] overflow-hidden">
+        <section id="mission" className="py-16 md:py-24 lg:py-32 bg-[#020202] relative border-t border-white/[0.02] overflow-hidden">
             {/* Background ambient lighting */}
             <div className="absolute top-1/2 left-0 w-1/3 h-1/2 bg-[#6d28d9]/10 rounded-full blur-[150px] -translate-y-1/2 pointer-events-none"></div>
 

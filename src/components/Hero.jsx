@@ -154,7 +154,7 @@ const Hero = () => {
     }, []);
 
     return (
-        <section ref={heroRef} className="relative min-h-screen bg-[#020202] flex items-center justify-center pt-20 pb-24 overflow-hidden font-sans tracking-tight perspective-1000">
+        <section ref={heroRef} className="relative min-h-[85vh] md:min-h-screen bg-[#020202] flex items-center justify-center pt-16 md:pt-20 pb-16 md:pb-24 overflow-hidden font-sans tracking-tight perspective-1000">
 
             {/* 0. Canvas Neural Background */}
             <motion.div style={{ y: bgParallaxY }} className="absolute inset-0">
@@ -291,23 +291,16 @@ const Hero = () => {
                         {/* Deep inner shadow core */}
                         <div className="absolute inset-[6px] rounded-[2.2rem] bg-[#000000] shadow-[inset_0_5px_15px_rgba(255,255,255,0.02)]"></div>
 
-                        {/* The crisp white custom icon exactly matching Onion AI */}
+                        {/* Vidyaraa Logo */}
                         <motion.div
                             style={{ translateZ: 50 }}
                             className="relative z-10 w-[4.5rem] h-[4.5rem] drop-shadow-[0_0_20px_rgba(255,255,255,0.8)]"
                         >
-                            <svg viewBox="0 0 100 100" className="w-full h-full text-white fill-current">
-                                <mask id="cutout">
-                                    <rect width="100" height="100" fill="white" />
-                                    <circle cx="50" cy="-20" r="50" fill="black" />
-                                    <circle cx="50" cy="120" r="50" fill="black" />
-                                    <circle cx="-20" cy="50" r="50" fill="black" />
-                                    <circle cx="120" cy="50" r="50" fill="black" />
-                                    <rect x="47" y="10" width="6" height="80" fill="black" rx="3" />
-                                    <rect x="10" y="47" width="80" height="6" fill="black" rx="3" />
-                                </mask>
-                                <circle cx="50" cy="50" r="45" fill="white" mask="url(#cutout)" />
-                            </svg>
+                            <img 
+                                src="/VidyaraaLogo1.PNG" 
+                                alt="Vidyaraa" 
+                                className="w-full h-full object-contain"
+                            />
                         </motion.div>
                     </motion.div>
                 </motion.div>

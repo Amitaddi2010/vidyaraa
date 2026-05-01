@@ -107,7 +107,7 @@ const Programs = () => {
     const prevCard = () => setActiveIndex((prev) => (prev - 1 + programs.length) % programs.length);
 
     return (
-        <section id="programs" className="py-32 bg-[#020202] relative border-t border-white/[0.02] overflow-hidden">
+        <section id="programs" className="py-16 md:py-24 lg:py-32 bg-[#020202] relative border-t border-white/[0.02] overflow-hidden">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-purple-600/5 rounded-full blur-[150px] pointer-events-none"></div>
 
             <div className="max-w-7xl mx-auto px-6 relative z-10">

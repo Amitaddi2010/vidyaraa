@@ -39,7 +39,7 @@ const Team = () => {
     ];
 
     return (
-        <section id="team" className="py-32 bg-[#020202] border-t border-white/[0.02] relative overflow-hidden">
+        <section id="team" className="py-16 md:py-24 lg:py-32 bg-[#020202] border-t border-white/[0.02] relative overflow-hidden">
             {/* Background glow for depth */}
             <GradientMesh variant="subtle" />
 
@@ -51,7 +51,7 @@ const Team = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8 }}
-                    className="text-center mb-20"
+                    className="text-center mb-12 md:mb-20"
                 >
                     <span className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-[#a1a1aa] text-xs font-bold tracking-widest uppercase mb-6 inline-block">
                         Leadership

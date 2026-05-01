@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BrainCircuit } from 'lucide-react';
 
 const bootMessages = [
     'Initializing neural core...',
@@ -100,8 +99,14 @@ const Preloader = ({ onComplete }) => {
                                 <motion.div
                                     animate={{ opacity: [0.5, 1, 0.5] }}
                                     transition={{ duration: 2, repeat: Infinity }}
+                                    className="flex items-center justify-center"
                                 >
-                                    <BrainCircuit className="w-12 h-12 text-white" />
+                                    {/* Vidyaraa Logo */}
+                                    <img 
+                                        src="/VidyaraaLogo1.PNG" 
+                                        alt="Vidyaraa" 
+                                        className="w-16 h-16 object-contain"
+                                    />
                                 </motion.div>
                             </div>
                         </motion.div>

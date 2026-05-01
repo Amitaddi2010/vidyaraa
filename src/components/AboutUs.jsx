@@ -22,14 +22,14 @@ const AboutUs = () => {
     ];
 
     return (
-        <section id="about" className="py-32 bg-[#020202] relative overflow-hidden border-t border-white/[0.02]">
+        <section id="about" className="py-16 md:py-24 lg:py-32 bg-[#020202] relative overflow-hidden border-t border-white/[0.02]">
             {/* Background glows */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#6d28d9]/10 rounded-full blur-[120px] pointer-events-none mix-blend-screen"></div>
             <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#4338ca]/10 rounded-full blur-[120px] pointer-events-none mix-blend-screen"></div>
 
             <div className="max-w-7xl mx-auto px-6 relative z-10">
 
-                <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center mb-24">
+                <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center mb-16 md:mb-24">
                     {/* Left Column: Mission Text */}
                     <motion.div
                         initial={{ opacity: 0, x: -30 }}
@@ -101,7 +101,7 @@ const AboutUs = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.8, delay: 0.4 }}
-                    className="pt-16 border-t border-white/[0.05]"
+                    className="pt-12 md:pt-16 border-t border-white/[0.05]"
                 >
                     <p className="text-center text-xs font-bold text-[#555555] uppercase tracking-[0.2em] mb-10">
                         Our Core AI Domains

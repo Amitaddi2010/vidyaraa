@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
 import { Menu, X, BrainCircuit, ChevronRight } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Magnetic = ({ children }) => {
     const ref = useRef(null);
@@ -44,6 +44,7 @@ const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const location = useLocation();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -52,6 +53,25 @@ const Navbar = () => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    // Handle hash link navigation with scroll
+    const scrollToSection = (e, href) => {
+        e.preventDefault();
+        setIsMobileMenuOpen(false);
+        
+        const targetId = href.replace('#', '');
+        const element = document.getElementById(targetId);
+        
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        } else if (location.pathname !== '/') {
+            navigate('/' + href);
+            setTimeout(() => {
+                const el = document.getElementById(targetId);
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+    };
 
     const navLinks = [
         { name: 'About', href: '#about' },
@@ -71,20 +91,25 @@ const Navbar = () => {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="fixed top-0 left-1/2 -translate-x-1/2 z-50 w-auto"
         >
-            <div className={`flex items-center gap-8 px-8 py-3 rounded-full border border-white/10 backdrop-blur-2xl transition-all duration-500 ${isScrolled ? 'bg-black/40 shadow-[0_8px_32px_rgba(0,0,0,0.4)] border-white/20' : 'bg-white/5'}`}>
+            <div className={`flex items-center gap-4 md:gap-6 lg:gap-8 px-4 md:px-6 lg:px-8 py-3 rounded-full border border-white/10 backdrop-blur-2xl transition-all duration-500 ${isScrolled ? 'bg-black/40 shadow-[0_8px_32px_rgba(0,0,0,0.4)] border-white/20' : 'bg-white/5'}`}>
 
                 {/* Logo */}
-                <Link to="/" className="flex items-center gap-3 group shrink-0">
-                    <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-white/10 border border-white/10 group-hover:border-white/40 transition-all duration-500">
-                        <BrainCircuit className="w-4 h-4 text-white" />
+                <Link to="/" className="flex items-center gap-2 md:gap-3 group shrink-0">
+                    <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-white/10 border border-white/10 group-hover:border-white/40 transition-all duration-500 overflow-hidden">
+                        {/* Vidyaraa Logo */}
+                        <img 
+                            src="/VidyaraaLogo1.PNG" 
+                            alt="Vidyaraa" 
+                            className="w-6 h-6 object-contain"
+                        />
                     </div>
                     <span className="text-sm font-bold tracking-tighter text-white">Vidyaraa</span>
                 </Link>
 
-                <div className="h-4 w-[1px] bg-white/10 hidden md:block"></div>
+                <div className="h-4 w-[1px] bg-white/10 hidden lg:block"></div>
 
-                {/* Desktop Nav Links */}
-                <div className="hidden md:flex items-center space-x-6">
+                {/* Desktop Nav Links - Hidden on mobile and tablet, visible on lg+ */}
+                <div className="hidden lg:flex items-center space-x-6">
                     {navLinks.map((link) => (
                         link.isExternal ? (
                             <Magnetic key={link.name}>
@@ -99,8 +124,9 @@ const Navbar = () => {
                         ) : (
                             <Magnetic key={link.name}>
                                 <a
-                                    href={location.pathname === '/' ? link.href : `/${link.href}`}
-                                    className="text-[11px] font-bold uppercase tracking-widest text-[#888] hover:text-white transition-colors py-1 relative group/link"
+                                    href={link.href}
+                                    onClick={(e) => scrollToSection(e, link.href)}
+                                    className="text-[11px] font-bold uppercase tracking-widest text-[#888] hover:text-white transition-colors py-1 relative group/link cursor-pointer"
                                 >
                                     {link.name}
                                     <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover/link:w-full"></span>
@@ -110,25 +136,25 @@ const Navbar = () => {
                     ))}
                 </div>
 
-                <div className="h-4 w-[1px] bg-white/10 hidden md:block"></div>
+                <div className="h-4 w-[1px] bg-white/10 hidden lg:block"></div>
 
-                {/* Survey Button */}
+                {/* Survey Button - Visible on md+ (tablet and desktop) */}
                 <Magnetic>
-                    <a href="#survey" className="hidden md:flex items-center gap-2 group/survey">
-                        <span className="text-[11px] font-black uppercase tracking-widest text-white/60 group-hover/survey:text-white transition-colors">Survey</span>
+                    <a href="#survey" className="hidden md:flex items-center gap-2 group/survey shrink-0">
+                        <span className="text-[11px] font-black uppercase tracking-widest text-white/60 group-hover/survey:text-white transition-colors hidden sm:inline">Survey</span>
                         <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover/survey:bg-white group-hover/survey:text-black transition-all duration-500">
                             <ChevronRight className="w-4 h-4" />
                         </div>
                     </a>
                 </Magnetic>
 
-                {/* Mobile Toggle */}
-                <button className="md:hidden text-[#888888] hover:text-white transition-colors" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+                {/* Mobile Toggle - Visible on mobile and tablet (lg:hidden) */}
+                <button className="lg:hidden text-[#888888] hover:text-white transition-colors shrink-0" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
                     {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                 </button>
             </div>
 
-            {/* Mobile Nav */}
+            {/* Mobile/Tablet Nav */}
             <AnimatePresence>
                 {isMobileMenuOpen && (
                     <motion.div
@@ -136,46 +162,48 @@ const Navbar = () => {
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="md:hidden absolute top-full left-0 w-full bg-[#050505] border-b border-white/10 overflow-hidden"
+                        className="lg:hidden absolute top-full left-0 w-full bg-[#050505] border-b border-white/10 overflow-hidden rounded-b-3xl mt-2 z-[100]"
                     >
-                        <div className="flex flex-col px-6 py-6 space-y-6">
-                            {navLinks.map((link, idx) => (
-                                <motion.div
-                                    key={link.name}
-                                    initial={{ x: -20, opacity: 0 }}
-                                    animate={{ x: 0, opacity: 1 }}
-                                    transition={{ delay: idx * 0.1 }}
-                                >
+                        <div className="flex flex-col px-6 py-6 space-y-4">
+                            {navLinks.map((link) => (
+                                <div key={link.name}>
                                     {link.isExternal ? (
                                         <Link
                                             to={link.href}
                                             onClick={() => setIsMobileMenuOpen(false)}
-                                            className="text-[#888888] hover:text-white text-lg font-medium transition-colors"
+                                            className="text-[#888888] hover:text-white text-lg font-medium transition-colors block py-2"
                                         >
                                             {link.name}
                                         </Link>
                                     ) : (
                                         <a
-                                            href={location.pathname === '/' ? link.href : `/${link.href}`}
-                                            onClick={() => setIsMobileMenuOpen(false)}
-                                            className="text-[#888888] hover:text-white text-lg font-medium transition-colors"
+                                            href={link.href}
+                                            onTouchStart={(e) => {
+                                                e.preventDefault();
+                                                scrollToSection(e, link.href);
+                                            }}
+                                            onClick={(e) => scrollToSection(e, link.href)}
+                                            className="text-[#888888] hover:text-white text-lg font-medium transition-colors block py-2 active:text-white"
                                         >
                                             {link.name}
                                         </a>
                                     )}
-                                </motion.div>
+                                </div>
                             ))}
-                            <motion.a
-                                initial={{ y: 20, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ delay: 0.4 }}
-                                href="#survey"
-                                onClick={() => setIsMobileMenuOpen(false)}
-                                className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white text-black font-bold transition-transform hover:scale-[1.02]"
-                            >
-                                Take the AI Ecosystem Survey
-                                <ChevronRight className="w-4 h-4" />
-                            </motion.a>
+                            <div className="pt-2">
+                                <a
+                                    href="#survey"
+                                    onTouchStart={(e) => {
+                                        e.preventDefault();
+                                        scrollToSection(e, '#survey');
+                                    }}
+                                    onClick={(e) => scrollToSection(e, '#survey')}
+                                    className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white text-black font-bold transition-transform active:scale-[0.98]"
+                                >
+                                    Take the AI Ecosystem Survey
+                                    <ChevronRight className="w-4 h-4" />
+                                </a>
+                            </div>
                         </div>
                     </motion.div>
                 )}

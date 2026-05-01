@@ -31,7 +31,7 @@ const Survey = () => {
     };
 
     return (
-        <section id="survey" className="py-32 bg-[#020202] relative border-t border-white/[0.02]">
+        <section id="survey" className="py-16 md:py-24 lg:py-32 bg-[#020202] relative border-t border-white/[0.02]">
             <div className="max-w-7xl mx-auto px-6 relative z-10">
 
                 <motion.div

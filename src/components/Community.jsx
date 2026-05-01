@@ -70,7 +70,7 @@ const CommunityCard = ({ href, icon: Icon, title, description, color, buttonText
 
 const Community = () => {
     return (
-        <section id="community" className="py-32 bg-[#020202] relative overflow-hidden border-t border-white/[0.02]">
+        <section id="community" className="py-16 md:py-24 lg:py-32 bg-[#020202] relative overflow-hidden border-t border-white/[0.02]">
 
             {/* Abstract Background Elements */}
             <div className="absolute inset-0 pointer-events-none z-0">
@@ -89,7 +89,7 @@ const Community = () => {
                     <h2 className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white mb-8 tracking-tighter">
                         Join the <span className="text-gradient">Local Network</span>
                     </h2>
-                    <p className="text-xl text-[#888888] mb-20 max-w-2xl mx-auto leading-relaxed">
+                    <p className="text-xl text-[#888888] mb-12 md:mb-20 max-w-2xl mx-auto leading-relaxed">
                         Whether you're a student, researcher, or developer, there's a place for you in the Vidyaraa ecosystem. Connect with peers, find mentors, and start shipping.
                     </p>
                 </motion.div>

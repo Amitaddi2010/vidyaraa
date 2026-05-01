@@ -23,29 +23,19 @@ import SystemStatus from './components/SystemStatus'
 import Preloader from './components/Preloader'
 import PageTransition from './components/PageTransition'
 import ScrollProgress from './components/ScrollProgress'
-import SectionDivider from './components/SectionDivider'
 import BackToTop from './components/BackToTop'
 
 const Home = () => (
   <>
     <Hero />
-    <SectionDivider />
     <section id="about"><AboutUs /></section>
-    <SectionDivider />
     <section id="mission"><Mission /></section>
-    <SectionDivider />
     <section id="programs"><Programs /></section>
-    <SectionDivider />
     <section id="events"><Events /></section>
-    <SectionDivider />
     <section id="team"><Team /></section>
-    <SectionDivider />
     <section id="experts"><Experts /></section>
-    <SectionDivider />
     <section id="survey"><Survey /></section>
-    <SectionDivider />
     <Partners />
-    <SectionDivider />
     <section id="community"><Community /></section>
   </>
 )

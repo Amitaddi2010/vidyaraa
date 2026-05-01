@@ -67,7 +67,7 @@ const Experts = () => {
     ];
 
     return (
-        <section id="experts" className="py-32 bg-[#020202] border-t border-white/[0.02] relative overflow-hidden">
+        <section id="experts" className="py-16 md:py-24 lg:py-32 bg-[#020202] border-t border-white/[0.02] relative overflow-hidden">
 
             {/* Background gradients */}
             <div className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-[#6d28d9]/5 rounded-full blur-[120px] pointer-events-none"></div>
@@ -81,7 +81,7 @@ const Experts = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8 }}
-                    className="text-center mb-24"
+                    className="text-center mb-16 md:mb-24"
                 >
                     <span className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-[#a1a1aa] text-xs font-bold tracking-widest uppercase mb-6 inline-block">
                         Advisors
@@ -101,7 +101,7 @@ const Experts = () => {
                 </motion.div>
 
                 {/* National Experts Block */}
-                <div className="mb-32">
+                <div className="mb-16 md:mb-24 lg:mb-32">
                     {/* Subheader */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}

@@ -34,7 +34,7 @@ const Events = () => {
     ];
 
     return (
-        <section id="events" className="py-32 bg-[#020202] border-t border-white/[0.02] relative overflow-hidden">
+        <section id="events" className="py-16 md:py-24 lg:py-32 bg-[#020202] border-t border-white/[0.02] relative overflow-hidden">
             <GradientMesh variant="subtle" />
             <div className="max-w-7xl mx-auto px-6 relative z-10">
 
@@ -43,7 +43,7 @@ const Events = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8 }}
-                    className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8"
+                    className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16 gap-6 md:gap-8"
                 >
                     <div className="max-w-xl">
                         <TextReveal className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 tracking-tight">Upcoming Events</TextReveal>
