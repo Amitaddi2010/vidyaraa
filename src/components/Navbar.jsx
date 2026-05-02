@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
-import { Menu, X, BrainCircuit, ChevronRight } from 'lucide-react';
+import { Menu, X, ChevronRight, Sun, Moon } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useTheme } from '../context/ThemeContext';
 
 const Magnetic = ({ children }) => {
     const ref = useRef(null);
@@ -45,6 +46,7 @@ const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
+    const { theme, toggleTheme } = useTheme();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -91,22 +93,29 @@ const Navbar = () => {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="fixed top-0 left-1/2 -translate-x-1/2 z-50 w-auto"
         >
-            <div className={`flex items-center gap-4 md:gap-6 lg:gap-8 px-4 md:px-6 lg:px-8 py-3 rounded-full border border-white/10 backdrop-blur-2xl transition-all duration-500 ${isScrolled ? 'bg-black/40 shadow-[0_8px_32px_rgba(0,0,0,0.4)] border-white/20' : 'bg-white/5'}`}>
+            <div className={`flex items-center gap-4 md:gap-6 lg:gap-8 px-4 md:px-6 lg:px-8 py-3 rounded-full border backdrop-blur-xl transition-all duration-500 ${isScrolled ? 'shadow-[0_8px_32px_rgba(0,0,0,0.3)]' : ''}`}
+                 style={{ 
+                     background: theme === 'light' 
+                         ? 'rgba(255, 255, 255, 0.7)'
+                         : 'rgba(10, 10, 10, 0.7)',
+                     borderColor: theme === 'light' ? 'rgba(249, 115, 22, 0.4)' : 'rgba(139, 92, 246, 0.4)'
+                 }}>
 
                 {/* Logo */}
                 <Link to="/" className="flex items-center gap-2 md:gap-3 group shrink-0">
-                    <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-white/10 border border-white/10 group-hover:border-white/40 transition-all duration-500 overflow-hidden">
-                        {/* Vidyaraa Logo */}
+                    <div className="relative flex items-center justify-center w-8 h-8 rounded-lg border transition-all duration-500 overflow-hidden"
+                         style={{ backgroundColor: 'var(--bg-tertiary)', borderColor: 'var(--border-color)' }}>
+                        {/* Vidyaraa Logo - Different for light/dark theme */}
                         <img 
-                            src="/VidyaraaLogo1.PNG" 
+                            src={theme === 'light' ? "/VidyaraaLogo-light.PNG" : "/VidyaraaLogo-dark.PNG"} 
                             alt="Vidyaraa" 
                             className="w-6 h-6 object-contain"
                         />
                     </div>
-                    <span className="text-sm font-bold tracking-tighter text-white">Vidyaraa</span>
+                    <span className="text-sm font-bold tracking-tighter" style={{ color: 'var(--text-primary)' }}>Vidyaraa</span>
                 </Link>
 
-                <div className="h-4 w-[1px] bg-white/10 hidden lg:block"></div>
+                <div className="h-4 w-[1px] hidden lg:block" style={{ backgroundColor: theme === 'light' ? 'rgba(249, 115, 22, 0.3)' : 'rgba(139, 92, 246, 0.3)' }}></div>
 
                 {/* Desktop Nav Links - Hidden on mobile and tablet, visible on lg+ */}
                 <div className="hidden lg:flex items-center space-x-6">
@@ -115,10 +124,11 @@ const Navbar = () => {
                             <Magnetic key={link.name}>
                                 <Link
                                     to={link.href}
-                                    className="text-[11px] font-bold uppercase tracking-widest text-[#888] hover:text-white transition-colors py-1 relative group/link"
+                                    className="text-[11px] font-bold uppercase tracking-widest transition-colors py-1 relative group/link"
+                                    style={{ color: 'var(--text-secondary)' }}
                                 >
                                     {link.name}
-                                    <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover/link:w-full"></span>
+                                    <span className="absolute bottom-0 left-0 w-0 h-[1px] transition-all duration-300 group-hover/link:w-full" style={{ backgroundColor: theme === 'light' ? '#f97316' : '#a78bfa' }}></span>
                                 </Link>
                             </Magnetic>
                         ) : (
@@ -126,30 +136,48 @@ const Navbar = () => {
                                 <a
                                     href={link.href}
                                     onClick={(e) => scrollToSection(e, link.href)}
-                                    className="text-[11px] font-bold uppercase tracking-widest text-[#888] hover:text-white transition-colors py-1 relative group/link cursor-pointer"
+                                    className="text-[11px] font-bold uppercase tracking-widest transition-colors py-1 relative group/link cursor-pointer"
+                                    style={{ color: 'var(--text-secondary)' }}
                                 >
                                     {link.name}
-                                    <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover/link:w-full"></span>
+                                    <span className="absolute bottom-0 left-0 w-0 h-[1px] transition-all duration-300 group-hover/link:w-full" style={{ backgroundColor: theme === 'light' ? '#f97316' : '#a78bfa' }}></span>
                                 </a>
                             </Magnetic>
                         )
                     ))}
                 </div>
 
-                <div className="h-4 w-[1px] bg-white/10 hidden lg:block"></div>
+                <div className="h-4 w-[1px] hidden lg:block" style={{ backgroundColor: theme === 'light' ? 'rgba(249, 115, 22, 0.3)' : 'rgba(139, 92, 246, 0.3)' }}></div>
 
                 {/* Survey Button - Visible on md+ (tablet and desktop) */}
                 <Magnetic>
                     <a href="#survey" className="hidden md:flex items-center gap-2 group/survey shrink-0">
-                        <span className="text-[11px] font-black uppercase tracking-widest text-white/60 group-hover/survey:text-white transition-colors hidden sm:inline">Survey</span>
-                        <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover/survey:bg-white group-hover/survey:text-black transition-all duration-500">
-                            <ChevronRight className="w-4 h-4" />
+                        <span className="text-[11px] font-black uppercase tracking-widest transition-colors hidden sm:inline" style={{ color: theme === 'light' ? '#c2410c' : '#c4b5fd' }}>Survey</span>
+                        <div className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-500"
+                             style={{ backgroundColor: theme === 'light' ? 'rgba(249, 115, 22, 0.2)' : 'rgba(139, 92, 246, 0.2)' }}>
+                            <ChevronRight className="w-4 h-4" style={{ color: theme === 'light' ? '#f97316' : '#a78bfa' }} />
                         </div>
                     </a>
                 </Magnetic>
 
+                <div className="h-4 w-[1px] hidden md:block" style={{ backgroundColor: theme === 'light' ? 'rgba(249, 115, 22, 0.3)' : 'rgba(139, 92, 246, 0.3)' }}></div>
+
+                {/* Theme Toggle Button */}
+                <button
+                    onClick={toggleTheme}
+                    className="flex items-center justify-center w-8 h-8 rounded-full transition-all duration-300 shrink-0"
+                    style={{ backgroundColor: theme === 'light' ? 'rgba(249, 115, 22, 0.15)' : 'rgba(139, 92, 246, 0.15)' }}
+                    aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+                >
+                    {theme === 'light' ? (
+                        <Moon className="w-4 h-4" style={{ color: 'var(--text-primary)' }} />
+                    ) : (
+                        <Sun className="w-4 h-4" style={{ color: 'var(--text-primary)' }} />
+                    )}
+                </button>
+
                 {/* Mobile Toggle - Visible on mobile and tablet (lg:hidden) */}
-                <button className="lg:hidden text-[#888888] hover:text-white transition-colors shrink-0" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+                <button className="lg:hidden transition-colors shrink-0" style={{ color: 'var(--text-secondary)' }} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
                     {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                 </button>
             </div>
@@ -162,7 +190,13 @@ const Navbar = () => {
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="lg:hidden absolute top-full left-0 w-full bg-[#050505] border-b border-white/10 overflow-hidden rounded-b-3xl mt-2 z-[100]"
+                        className="lg:hidden absolute top-full left-0 w-full border-b overflow-hidden rounded-b-3xl mt-2 z-[100] backdrop-blur-xl"
+                        style={{ 
+                            background: theme === 'light' 
+                                ? 'rgba(255, 255, 255, 0.85)'
+                                : 'rgba(10, 10, 10, 0.85)',
+                            borderColor: theme === 'light' ? 'rgba(249, 115, 22, 0.4)' : 'rgba(139, 92, 246, 0.4)'
+                        }}
                     >
                         <div className="flex flex-col px-6 py-6 space-y-4">
                             {navLinks.map((link) => (
@@ -171,7 +205,8 @@ const Navbar = () => {
                                         <Link
                                             to={link.href}
                                             onClick={() => setIsMobileMenuOpen(false)}
-                                            className="text-[#888888] hover:text-white text-lg font-medium transition-colors block py-2"
+                                            className="text-lg font-medium transition-colors block py-2"
+                                            style={{ color: 'var(--text-secondary)' }}
                                         >
                                             {link.name}
                                         </Link>
@@ -183,7 +218,8 @@ const Navbar = () => {
                                                 scrollToSection(e, link.href);
                                             }}
                                             onClick={(e) => scrollToSection(e, link.href)}
-                                            className="text-[#888888] hover:text-white text-lg font-medium transition-colors block py-2 active:text-white"
+                                            className="text-lg font-medium transition-colors block py-2"
+                                            style={{ color: 'var(--text-secondary)' }}
                                         >
                                             {link.name}
                                         </a>
@@ -198,11 +234,43 @@ const Navbar = () => {
                                         scrollToSection(e, '#survey');
                                     }}
                                     onClick={(e) => scrollToSection(e, '#survey')}
-                                    className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white text-black font-bold transition-transform active:scale-[0.98]"
+                                    className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold transition-transform active:scale-[0.98]"
+                                    style={{ 
+                                        backgroundColor: theme === 'light' ? '#f97316' : '#8b5cf6',
+                                        color: '#ffffff'
+                                    }}
                                 >
                                     Take the AI Ecosystem Survey
                                     <ChevronRight className="w-4 h-4" />
                                 </a>
+                            </div>
+
+                            {/* Mobile Theme Toggle */}
+                            <div className="pt-4 border-t" style={{ borderColor: theme === 'light' ? 'rgba(249, 115, 22, 0.2)' : 'rgba(139, 92, 246, 0.3)' }}>
+                                <button
+                                    onClick={() => {
+                                        toggleTheme();
+                                        setIsMobileMenuOpen(false);
+                                    }}
+                                    className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl border font-medium transition-all"
+                                    style={{ 
+                                        borderColor: theme === 'light' ? 'rgba(249, 115, 22, 0.3)' : 'rgba(139, 92, 246, 0.4)',
+                                        color: theme === 'light' ? '#c2410c' : '#c4b5fd',
+                                        backgroundColor: theme === 'light' ? 'rgba(249, 115, 22, 0.1)' : 'rgba(139, 92, 246, 0.1)'
+                                    }}
+                                >
+                                    {theme === 'light' ? (
+                                        <>
+                                            <Moon className="w-5 h-5" />
+                                            <span>Switch to Dark Mode</span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Sun className="w-5 h-5" />
+                                            <span>Switch to Light Mode</span>
+                                        </>
+                                    )}
+                                </button>
                             </div>
                         </div>
                     </motion.div>

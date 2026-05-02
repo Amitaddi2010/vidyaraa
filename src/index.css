@@ -22,6 +22,38 @@
   --color-accent-950: #2e1065;
 }
 
+/* Theme Variables - Light theme */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #f1f3f4;
+  --text-primary: #1a1a2e;
+  --text-secondary: #4a4a5a;
+  --text-muted: #7a7a8a;
+  --border-color: rgba(0, 0, 0, 0.08);
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --accent-primary: #f97316;
+  --accent-secondary: #fb923c;
+  --accent-purple: #f97316;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --bg-primary: #020202;
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #111111;
+  --text-primary: #ffffff;
+  --text-secondary: #888888;
+  --text-muted: #666666;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --card-bg: rgba(10, 10, 10, 0.8);
+  --accent-primary: #8b5cf6;
+  --accent-secondary: #a78bfa;
+  --accent-purple: #8b5cf6;
+  --shadow-color: rgba(0, 0, 0, 0.4);
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -29,11 +61,11 @@
   }
 
   body {
-    background-color: #020202;
-    color: #f8fafc;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    selection-background-color: rgba(109, 40, 217, 0.3);
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 }
 
@@ -41,13 +73,13 @@
   .text-gradient {
     background-clip: text;
     color: transparent;
-    background-image: linear-gradient(to right, #ffffff, #94a3b8);
+    background-image: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
   }
 
   .bg-glass {
-    background-color: rgba(10, 10, 10, 0.6);
+    background-color: var(--card-bg);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
   }
 
   .card-hover {
@@ -55,8 +87,8 @@
   }
 
   .card-hover:hover {
-    border-color: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 40px -10px rgba(109, 40, 217, 0.2);
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 40px -10px rgba(249, 115, 22, 0.2);
     transform: translateY(-4px);
   }
 }
@@ -118,6 +150,15 @@
 
 .animate-shooting-line {
   animation: shooting-line linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 /* Background gradient animation */

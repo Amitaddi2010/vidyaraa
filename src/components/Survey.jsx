@@ -1,8 +1,10 @@
 import React, { useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ClipboardList, ArrowUpRight, Radio } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 const Survey = () => {
+    const { theme } = useTheme();
     const cardRef = useRef(null);
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
@@ -31,7 +33,7 @@ const Survey = () => {
     };
 
     return (
-        <section id="survey" className="py-16 md:py-24 lg:py-32 bg-[#020202] relative border-t border-white/[0.02]">
+        <section id="survey" className="py-16 md:py-24 lg:py-32 relative border-t" style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border-color)' }}>
             <div className="max-w-7xl mx-auto px-6 relative z-10">
 
                 <motion.div
@@ -46,22 +48,29 @@ const Survey = () => {
                         rotateX,
                         rotateY,
                         transformStyle: "preserve-3d",
+                        backgroundColor: 'var(--bg-secondary)',
+                        borderColor: 'var(--border-color)',
+                        boxShadow: '0 0 60px rgba(0,0,0,0.02)'
                     }}
-                    className="relative bg-[#050505] rounded-[2.5rem] p-1 border border-white/5 shadow-[0_0_60px_rgba(255,255,255,0.02)] overflow-hidden group cursor-default"
+                    className="relative rounded-[2.5rem] p-1 border overflow-hidden group cursor-default"
                 >
                     {/* Animated conic background for border glow effect */}
                     <div className="absolute inset-[-100%] bg-[conic-gradient(from_0deg,transparent_0_340deg,#fff_360deg)] animate-[spin_4s_linear_infinite] opacity-20"></div>
 
-                    <div className="bg-[#0A0A0A] rounded-[2.4rem] p-10 md:p-20 flex flex-col lg:flex-row items-center justify-between gap-16 relative overflow-hidden z-10 h-full">
+                    <div className="rounded-[2.4rem] p-10 md:p-20 flex flex-col lg:flex-row items-center justify-between gap-16 relative overflow-hidden z-10 h-full"
+                         style={{ backgroundColor: 'var(--card-bg)' }}>
 
-                        {/* Ambient Lighting & Pulsar */}
-                        <div className="absolute top-1/2 left-1/4 w-[600px] h-[600px] bg-[#6d28d9]/10 rounded-full blur-[120px] -translate-y-1/2 pointer-events-none"></div>
+                        {/* Ambient Lighting & Pulsar - Orange for light theme */}
+                        <div className="absolute top-1/2 left-1/4 w-[600px] h-[600px] rounded-full blur-[120px] -translate-y-1/2 pointer-events-none"
+                             style={{ backgroundColor: theme === 'light' ? 'rgba(249, 115, 22, 0.1)' : 'rgba(109, 40, 217, 0.1)' }}></div>
 
                         {/* Survey Pulsar Visual */}
                         <div className="absolute top-10 right-10 scale-150 opacity-20 group-hover:opacity-40 transition-opacity duration-700">
                             <div className="relative">
-                                <div className="w-4 h-4 rounded-full bg-purple-500 animate-pulse"></div>
-                                <div className="absolute inset-0 w-4 h-4 rounded-full border border-purple-500 animate-ping"></div>
+                                <div className="w-4 h-4 rounded-full animate-pulse"
+                                     style={{ backgroundColor: theme === 'light' ? '#f97316' : '#8b5cf6' }}></div>
+                                <div className="absolute inset-0 w-4 h-4 rounded-full border animate-ping"
+                                     style={{ borderColor: theme === 'light' ? '#f97316' : '#8b5cf6' }}></div>
                                 <div className="absolute inset-[-20px] w-14 h-14 border border-white/5 rounded-full animate-[spin_10s_linear_infinite]"></div>
                             </div>
                         </div>
@@ -70,11 +79,12 @@ const Survey = () => {
                             style={{ transform: "translateZ(50px)" }}
                             className="relative z-10 max-w-2xl text-center lg:text-left"
                         >
-                            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-white text-xs font-semibold uppercase tracking-widest mb-8">
+                            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border text-xs font-semibold uppercase tracking-widest mb-8"
+                                 style={{ backgroundColor: 'var(--bg-tertiary)', borderColor: 'var(--border-color)', color: 'var(--text-primary)' }}>
                                 <Radio className="w-4 h-4 text-emerald-400 animate-pulse" />
                                 <span className="text-emerald-400/80">Live Research Initiative</span>
                             </div>
-                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 tracking-tight">
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight" style={{ color: 'var(--text-primary)' }}>
                                 Take the AI Ecosystem <br className="hidden md:block" /> Research Survey
                             </h2>
                             <p className="text-xl text-[#888888] leading-relaxed">

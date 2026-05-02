@@ -1,7 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useMotionValue, useTransform, useSpring, useScroll } from 'framer-motion';
+import { useTheme } from '../context/ThemeContext';
 
 const Hero = () => {
+    const { theme } = useTheme();
     const cardRef = useRef(null);
     const canvasRef = useRef(null);
     const heroRef = useRef(null);
@@ -105,7 +107,9 @@ const Hero = () => {
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+                // Orange for light theme, white for dark theme
+                const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+                ctx.fillStyle = isLight ? 'rgba(249, 115, 22, 0.25)' : 'rgba(255, 255, 255, 0.2)';
                 ctx.fill();
             }
         }
@@ -126,7 +130,10 @@ const Hero = () => {
                         ctx.beginPath();
                         ctx.moveTo(p.x, p.y);
                         ctx.lineTo(p2.x, p2.y);
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * (1 - dist / 150)})`;
+                        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+                        ctx.strokeStyle = isLight 
+                            ? `rgba(249, 115, 22, ${0.15 * (1 - dist / 150)})`
+                            : `rgba(255, 255, 255, ${0.1 * (1 - dist / 150)})`;
                         ctx.stroke();
                     }
                 });
@@ -154,7 +161,7 @@ const Hero = () => {
     }, []);
 
     return (
-        <section ref={heroRef} className="relative min-h-[85vh] md:min-h-screen bg-[#020202] flex items-center justify-center pt-16 md:pt-20 pb-16 md:pb-24 overflow-hidden font-sans tracking-tight perspective-1000">
+        <section ref={heroRef} className="relative min-h-[85vh] md:min-h-screen flex items-center justify-center pt-16 md:pt-20 pb-16 md:pb-24 overflow-hidden font-sans tracking-tight perspective-1000" style={{ backgroundColor: 'var(--bg-primary)' }}>
 
             {/* 0. Canvas Neural Background */}
             <motion.div style={{ y: bgParallaxY }} className="absolute inset-0">
@@ -169,13 +176,16 @@ const Hero = () => {
                 {lines.map((line) => (
                     <div
                         key={line.id}
-                        className="absolute top-0 w-[1px] bg-gradient-to-b from-transparent via-white to-transparent animate-shooting-line"
+                        className="absolute top-0 w-[1px] animate-shooting-line"
                         style={{
                             left: line.left,
                             height: line.height,
                             animationDelay: line.delay,
                             animationDuration: line.duration,
-                            opacity: line.opacity
+                            opacity: line.opacity,
+                            background: theme === 'light' 
+                                ? 'linear-gradient(to bottom, transparent, rgba(249, 115, 22, 0.6), transparent)'
+                                : 'linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.5), transparent)'
                         }}
                     />
                 ))}
@@ -183,23 +193,45 @@ const Hero = () => {
 
             {/* 2. Soft Layered Silk Waves (CSS approach) */}
             <div className="absolute inset-x-0 bottom-0 h-full pointer-events-none z-0 overflow-hidden flex justify-between items-end">
-                {/* Left Wave Assembly */}
+                {/* Left Wave Assembly - Orange tint for light theme */}
                 <div className="relative w-[50vw] h-[80vh] flex items-end justify-start opacity-70">
-                    <div className="absolute -bottom-[20%] -left-[20%] w-[120%] h-[120%] bg-gradient-to-tr from-[#020202] via-[#111111] to-transparent rounded-full shadow-[inset_-2px_2px_4px_rgba(255,255,255,0.05),0_0_40px_rgba(255,255,255,0.02)] blur-[1px]"></div>
-                    <div className="absolute -bottom-[10%] -left-[10%] w-[100%] h-[100%] bg-gradient-to-tr from-[#000] via-[#0a0a0a] to-transparent rounded-full shadow-[inset_-2px_2px_4px_rgba(255,255,255,0.08),0_0_40px_rgba(255,255,255,0.03)] blur-[1px]"></div>
-                    <div className="absolute bottom-0 left-0 w-[80%] h-[80%] bg-gradient-to-tr from-[#000] via-[#050505] to-transparent rounded-full shadow-[inset_-2px_2px_4px_rgba(255,255,255,0.1),0_0_40px_rgba(255,255,255,0.04)] blur-[1px]"></div>
+                    {theme === 'light' ? (
+                        <>
+                            <div className="absolute -bottom-[20%] -left-[20%] w-[120%] h-[120%] bg-gradient-to-tr from-orange-100 via-orange-50 to-transparent rounded-full blur-[1px]"></div>
+                            <div className="absolute -bottom-[10%] -left-[10%] w-[100%] h-[100%] bg-gradient-to-tr from-orange-200 via-orange-100 to-transparent rounded-full blur-[1px]"></div>
+                            <div className="absolute bottom-0 left-0 w-[80%] h-[80%] bg-gradient-to-tr from-orange-300 via-orange-200 to-transparent rounded-full blur-[1px]"></div>
+                        </>
+                    ) : (
+                        <>
+                            <div className="absolute -bottom-[20%] -left-[20%] w-[120%] h-[120%] bg-gradient-to-tr from-[#020202] via-[#111111] to-transparent rounded-full shadow-[inset_-2px_2px_4px_rgba(255,255,255,0.05),0_0_40px_rgba(255,255,255,0.02)] blur-[1px]"></div>
+                            <div className="absolute -bottom-[10%] -left-[10%] w-[100%] h-[100%] bg-gradient-to-tr from-[#000] via-[#0a0a0a] to-transparent rounded-full shadow-[inset_-2px_2px_4px_rgba(255,255,255,0.08),0_0_40px_rgba(255,255,255,0.03)] blur-[1px]"></div>
+                            <div className="absolute bottom-0 left-0 w-[80%] h-[80%] bg-gradient-to-tr from-[#000] via-[#050505] to-transparent rounded-full shadow-[inset_-2px_2px_4px_rgba(255,255,255,0.1),0_0_40px_rgba(255,255,255,0.04)] blur-[1px]"></div>
+                        </>
+                    )}
                 </div>
 
-                {/* Right Wave Assembly */}
+                {/* Right Wave Assembly - Orange tint for light theme */}
                 <div className="relative w-[50vw] h-[80vh] flex items-end justify-end opacity-70">
-                    <div className="absolute -bottom-[20%] -right-[20%] w-[120%] h-[120%] bg-gradient-to-tl from-[#020202] via-[#111111] to-transparent rounded-full shadow-[inset_2px_2px_4px_rgba(255,255,255,0.05),0_0_40px_rgba(255,255,255,0.02)] blur-[1px]"></div>
-                    <div className="absolute -bottom-[10%] -right-[10%] w-[100%] h-[100%] bg-gradient-to-tl from-[#000] via-[#0a0a0a] to-transparent rounded-full shadow-[inset_2px_2px_4px_rgba(255,255,255,0.08),0_0_40px_rgba(255,255,255,0.03)] blur-[1px]"></div>
-                    <div className="absolute bottom-0 right-0 w-[80%] h-[80%] bg-gradient-to-tl from-[#000] via-[#050505] to-transparent rounded-full shadow-[inset_2px_2px_4px_rgba(255,255,255,0.1),0_0_40px_rgba(255,255,255,0.04)] blur-[1px]"></div>
+                    {theme === 'light' ? (
+                        <>
+                            <div className="absolute -bottom-[20%] -right-[20%] w-[120%] h-[120%] bg-gradient-to-tl from-orange-100 via-orange-50 to-transparent rounded-full blur-[1px]"></div>
+                            <div className="absolute -bottom-[10%] -right-[10%] w-[100%] h-[100%] bg-gradient-to-tl from-orange-200 via-orange-100 to-transparent rounded-full blur-[1px]"></div>
+                            <div className="absolute bottom-0 right-0 w-[80%] h-[80%] bg-gradient-to-tl from-orange-300 via-orange-200 to-transparent rounded-full blur-[1px]"></div>
+                        </>
+                    ) : (
+                        <>
+                            <div className="absolute -bottom-[20%] -right-[20%] w-[120%] h-[120%] bg-gradient-to-tl from-[#020202] via-[#111111] to-transparent rounded-full shadow-[inset_2px_2px_4px_rgba(255,255,255,0.05),0_0_40px_rgba(255,255,255,0.02)] blur-[1px]"></div>
+                            <div className="absolute -bottom-[10%] -right-[10%] w-[100%] h-[100%] bg-gradient-to-tl from-[#000] via-[#0a0a0a] to-transparent rounded-full shadow-[inset_2px_2px_4px_rgba(255,255,255,0.08),0_0_40px_rgba(255,255,255,0.03)] blur-[1px]"></div>
+                            <div className="absolute bottom-0 right-0 w-[80%] h-[80%] bg-gradient-to-tl from-[#000] via-[#050505] to-transparent rounded-full shadow-[inset_2px_2px_4px_rgba(255,255,255,0.1),0_0_40px_rgba(255,255,255,0.04)] blur-[1px]"></div>
+                        </>
+                    )}
                 </div>
 
-                {/* Floor Depth Blur */}
-                <div className="absolute bottom-0 left-0 w-full h-[20vh] bg-gradient-to-t from-black to-transparent"></div>
-                <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-[80%] h-40 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.06)_0,transparent_70%)] blur-xl"></div>
+                {/* Floor Depth Blur - Orange for light theme */}
+                <div className="absolute bottom-0 left-0 w-full h-[20vh]"
+                     style={{ background: theme === 'light' ? 'linear-gradient(to top, rgba(249, 115, 22, 0.1), transparent)' : 'linear-gradient(to top, black, transparent)' }}></div>
+                <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-[80%] h-40 blur-xl"
+                     style={{ background: theme === 'light' ? 'radial-gradient(ellipse at center, rgba(249, 115, 22, 0.1) 0, transparent 70%)' : 'radial-gradient(ellipse at center, rgba(255,255,255,0.06) 0, transparent 70%)' }}></div>
             </div>
 
             <motion.div style={{ y: parallaxY, opacity: parallaxOpacity }} className="max-w-5xl mx-auto px-6 relative z-10 w-full flex flex-col items-center justify-center text-center mt-8">
@@ -209,13 +241,19 @@ const Hero = () => {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-[#0a0a0a]/60 backdrop-blur-md text-[#aaaaaa] text-[10px] md:text-xs font-semibold tracking-widest uppercase mb-10 shadow-lg"
+                    className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border backdrop-blur-md text-[10px] md:text-xs font-semibold tracking-widest uppercase mb-10 shadow-lg"
+                    style={{ 
+                        backgroundColor: theme === 'light' ? 'rgba(255, 237, 213, 0.6)' : 'var(--card-bg)', 
+                        borderColor: theme === 'light' ? 'rgba(249, 115, 22, 0.4)' : 'var(--border-color)'
+                    }}
                 >
-                    {/* Custom 4-point star for the badge */}
-                    <svg className="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M12 2l1.5 7.5L21 11l-7.5 1.5L12 20l-1.5-7.5L3 11l7.5-1.5z" fill="currentColor" stroke="none" />
-                    </svg>
-                    <span className="opacity-90">VIDYARAA AI INITIATIVE</span>
+                    {/* Logo for the badge */}
+                    <img 
+                        src={theme === 'light' ? "/VidyaraaLogo-light.PNG" : "/VidyaraaLogo-dark.PNG"} 
+                        alt="Vidyaraa" 
+                        className="w-4 h-4 object-contain"
+                    />
+                    <span className="opacity-90" style={{ color: theme === 'light' ? '#c2410c' : 'var(--text-secondary)' }}>VIDYARAA AI INITIATIVE</span>
                 </motion.div>
 
                 {/* Main Headline */}
@@ -225,7 +263,7 @@ const Hero = () => {
                     transition={{ duration: 0.9, delay: 0.1, ease: "easeOut" }}
                     className="mb-8"
                 >
-                    <h1 className="text-4xl md:text-5xl lg:text-7xl font-semibold text-white leading-[1.1] tracking-[-0.04em] drop-shadow-2xl">
+                    <h1 className="text-4xl md:text-5xl lg:text-7xl font-semibold leading-[1.1] tracking-[-0.04em] drop-shadow-2xl" style={{ color: 'var(--text-primary)' }}>
                         Building the Future of AI<br />in Jammu & Kashmir.
                     </h1>
                 </motion.div>
@@ -236,7 +274,7 @@ const Hero = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
                 >
-                    <p className="text-[1.1rem] md:text-[1.3rem] leading-relaxed text-[#888888] mb-12 max-w-2xl mx-auto font-normal tracking-wide">
+                    <p className="text-[1.1rem] md:text-[1.3rem] leading-relaxed mb-12 max-w-2xl mx-auto font-normal tracking-wide" style={{ color: 'var(--text-muted)' }}>
                         Uniting student talent, academic research, and industry to accelerate innovation. Empowering the next generation of AI leaders.
                     </p>
                 </motion.div>
@@ -251,11 +289,18 @@ const Hero = () => {
                     style={{ x: btnSpringX, y: btnSpringY }}
                     className="relative group mb-16 z-30 inline-block"
                 >
-                    {/* Intense Outer Glow behind button */}
-                    <div className="absolute -inset-1.5 bg-white rounded-full blur-[24px] opacity-25 group-hover:opacity-40 transition-opacity duration-500"></div>
-                    <div className="absolute -inset-4 bg-white rounded-full blur-[60px] opacity-10 group-hover:opacity-15 transition-opacity duration-500"></div>
+                    {/* Intense Outer Glow behind button - Orange for light theme */}
+                    <div className="absolute -inset-1.5 rounded-full blur-[24px] opacity-25 group-hover:opacity-40 transition-opacity duration-500"
+                         style={{ backgroundColor: theme === 'light' ? '#f97316' : 'white' }}></div>
+                    <div className="absolute -inset-4 rounded-full blur-[60px] opacity-10 group-hover:opacity-15 transition-opacity duration-500"
+                         style={{ backgroundColor: theme === 'light' ? '#fb923c' : 'white' }}></div>
 
-                    <a href="#events" className="relative inline-block px-10 py-4 bg-[#ffffff] text-black text-sm md:text-base font-bold rounded-full transition-transform duration-300 whitespace-nowrap tracking-tight">
+                    <a href="#events" className="relative inline-block px-10 py-4 text-sm md:text-base font-bold rounded-full transition-transform duration-300 whitespace-nowrap tracking-tight"
+                       style={{ 
+                           backgroundColor: theme === 'light' ? '#f97316' : 'var(--text-primary)', 
+                           color: theme === 'light' ? 'white' : 'var(--bg-primary)',
+                           boxShadow: theme === 'light' ? '0 4px 20px rgba(249, 115, 22, 0.4)' : 'none'
+                       }}>
                         Get Involved Now
                     </a>
                 </motion.div>
@@ -267,9 +312,11 @@ const Hero = () => {
                     transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
                     className="relative w-36 h-36 perspective-[2000px] z-20 mt-8"
                 >
-                    {/* Vertical Light Pillar passing exactly through the cube */}
-                    <div className="absolute bottom-[20%] left-1/2 -translate-x-1/2 w-[60px] h-[500px] bg-gradient-to-t from-transparent via-white to-transparent blur-[30px] opacity-20 pointer-events-none mix-blend-screen scale-y-150"></div>
-                    <div className="absolute bottom-[50%] left-1/2 -translate-x-1/2 w-[10px] h-[400px] bg-gradient-to-t from-transparent via-white to-transparent blur-[4px] opacity-60 pointer-events-none mix-blend-screen scale-y-150"></div>
+                    {/* Vertical Light Pillar passing exactly through the cube - Orange for light theme */}
+                    <div className="absolute bottom-[20%] left-1/2 -translate-x-1/2 w-[60px] h-[500px] blur-[30px] opacity-20 pointer-events-none mix-blend-screen scale-y-150"
+                         style={{ background: theme === 'light' ? 'linear-gradient(to top, transparent, rgba(249, 115, 22, 0.6), transparent)' : 'linear-gradient(to top, transparent, rgba(255, 255, 255, 0.5), transparent)' }}></div>
+                    <div className="absolute bottom-[50%] left-1/2 -translate-x-1/2 w-[10px] h-[400px] blur-[4px] opacity-60 pointer-events-none mix-blend-screen scale-y-150"
+                         style={{ background: theme === 'light' ? 'linear-gradient(to top, transparent, rgba(249, 115, 22, 0.8), transparent)' : 'linear-gradient(to top, transparent, rgba(255, 255, 255, 0.8), transparent)' }}></div>
 
                     <motion.div
                         ref={cardRef}
@@ -283,21 +330,24 @@ const Hero = () => {
                         className="w-full h-full relative group flex items-center justify-center cursor-pointer"
                     >
                         {/* The outer glowing rounded rectangle container with prominent light border */}
-                        <div className="absolute inset-0 rounded-[2.5rem] bg-[#0a0a0a]/80 backdrop-blur-xl transition-all duration-300 group-hover:shadow-[0_0_60px_rgba(255,255,255,0.15)] group-hover:bg-[#111] overflow-hidden">
-                            <div className="absolute inset-0 rounded-[2.5rem] border-[1.5px] border-white/20 shadow-[inset_0_0_20px_rgba(255,255,255,0.05)]"></div>
-                            <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent"></div>
+                        <div className="absolute inset-0 rounded-[2.5rem] backdrop-blur-xl transition-all duration-300 overflow-hidden"
+                             style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--border-color)' }}>
+                            <div className="absolute inset-0 rounded-[2.5rem] shadow-[inset_0_0_20px_rgba(0,0,0,0.05)]"></div>
+                            <div className="absolute top-0 left-0 w-full h-1/2"
+                                 style={{ background: theme === 'light' ? 'linear-gradient(to bottom, rgba(249, 115, 22, 0.15), transparent)' : 'linear-gradient(to bottom, rgba(255,255,255,0.1), transparent)' }}></div>
                         </div>
 
                         {/* Deep inner shadow core */}
-                        <div className="absolute inset-[6px] rounded-[2.2rem] bg-[#000000] shadow-[inset_0_5px_15px_rgba(255,255,255,0.02)]"></div>
+                        <div className="absolute inset-[6px] rounded-[2.2rem] shadow-[inset_0_5px_15px_rgba(0,0,0,0.05)]"
+                             style={{ backgroundColor: 'var(--bg-secondary)' }}></div>
 
-                        {/* Vidyaraa Logo */}
+                        {/* Vidyaraa Logo - Different for light/dark theme */}
                         <motion.div
                             style={{ translateZ: 50 }}
-                            className="relative z-10 w-[4.5rem] h-[4.5rem] drop-shadow-[0_0_20px_rgba(255,255,255,0.8)]"
+                            className="relative z-10 w-[4.5rem] h-[4.5rem] drop-shadow-[0_0_20px_rgba(128,128,128,0.3)]"
                         >
                             <img 
-                                src="/VidyaraaLogo1.PNG" 
+                                src={theme === 'light' ? "/VidyaraaLogo-light.PNG" : "/VidyaraaLogo-dark.PNG"} 
                                 alt="Vidyaraa" 
                                 className="w-full h-full object-contain"
                             />

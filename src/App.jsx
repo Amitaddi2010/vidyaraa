@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import Lenis from 'lenis'
 import 'lenis/dist/lenis.css'
+import { ThemeProvider } from './context/ThemeContext'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import AboutUs from './components/AboutUs'
@@ -18,6 +19,7 @@ import Footer from './components/Footer'
 import PrivacyPolicy from './components/PrivacyPolicy'
 import TermsOfService from './components/TermsOfService'
 import Contact from './components/Contact'
+import EventsPage from './components/EventsPage'
 import CustomCursor from './components/CustomCursor'
 import SystemStatus from './components/SystemStatus'
 import Preloader from './components/Preloader'
@@ -70,13 +72,13 @@ function App() {
   }, [])
 
   return (
-    <>
+    <ThemeProvider>
       <AnimatePresence>
         {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
       </AnimatePresence>
 
       {!isLoading && (
-        <div className="bg-[#020202] min-h-screen text-slate-200 font-sans selection:bg-purple-900/40 flex flex-col cursor-none">
+        <div className="min-h-screen font-sans flex flex-col transition-colors duration-300" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
           <ScrollProgress />
           <CustomCursor />
           <Navbar />
@@ -84,6 +86,7 @@ function App() {
             <AnimatePresence mode="wait">
               <Routes location={location} key={location.pathname}>
                 <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+                <Route path="/events" element={<PageTransition><EventsPage /></PageTransition>} />
                 <Route path="/privacy" element={<PageTransition><PrivacyPolicy /></PageTransition>} />
                 <Route path="/terms" element={<PageTransition><TermsOfService /></PageTransition>} />
                 <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
@@ -95,7 +98,7 @@ function App() {
           <BackToTop />
         </div>
       )}
-    </>
+    </ThemeProvider>
   )
 }
 

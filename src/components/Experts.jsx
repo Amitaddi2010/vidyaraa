@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { User, Globe, GraduationCap, Building2 } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 const Experts = () => {
+    const { theme } = useTheme();
     const nationalExperts = [
         {
             name: "Prof. Vinod Sharma",
@@ -67,11 +69,13 @@ const Experts = () => {
     ];
 
     return (
-        <section id="experts" className="py-16 md:py-24 lg:py-32 bg-[#020202] border-t border-white/[0.02] relative overflow-hidden">
+        <section id="experts" className="py-16 md:py-24 lg:py-32 border-t relative overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border-color)' }}>
 
-            {/* Background gradients */}
-            <div className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-[#6d28d9]/5 rounded-full blur-[120px] pointer-events-none"></div>
-            <div className="absolute bottom-[20%] left-[-10%] w-[600px] h-[600px] bg-[#4338ca]/5 rounded-full blur-[120px] pointer-events-none"></div>
+            {/* Background gradients - Orange for light theme */}
+            <div className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] rounded-full blur-[120px] pointer-events-none"
+                 style={{ backgroundColor: theme === 'light' ? 'rgba(249, 115, 22, 0.05)' : 'rgba(109, 40, 217, 0.05)' }}></div>
+            <div className="absolute bottom-[20%] left-[-10%] w-[600px] h-[600px] rounded-full blur-[120px] pointer-events-none"
+                 style={{ backgroundColor: theme === 'light' ? 'rgba(251, 146, 60, 0.05)' : 'rgba(67, 56, 202, 0.05)' }}></div>
 
             <div className="max-w-7xl mx-auto px-6 relative z-10">
 
@@ -83,19 +87,20 @@ const Experts = () => {
                     transition={{ duration: 0.8 }}
                     className="text-center mb-16 md:mb-24"
                 >
-                    <span className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-[#a1a1aa] text-xs font-bold tracking-widest uppercase mb-6 inline-block">
+                    <h3 className="text-2xl md:text-3xl font-bold mb-6 tracking-tight" style={{ color: 'var(--text-primary)' }}>
                         Advisors
-                    </span>
+                    </h3>
                     <motion.h2
                         initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
                         whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                         viewport={{ once: true }}
                         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                        className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-8 tracking-tight"
+                        className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-8 tracking-tight"
+                        style={{ color: 'var(--text-primary)' }}
                     >
                         Experts On Board
                     </motion.h2>
-                    <p className="text-[#888888] text-lg max-w-3xl mx-auto leading-relaxed">
+                    <p className="text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: 'var(--text-muted)' }}>
                         World-renowned AI researchers and industry leaders supporting Vidyaraa's mission.
                     </p>
                 </motion.div>
@@ -110,18 +115,19 @@ const Experts = () => {
                         transition={{ duration: 0.8 }}
                         className="flex flex-col items-center text-center mb-16"
                     >
-                        <div className="w-16 h-16 rounded-full bg-[#111] border border-white/10 flex items-center justify-center mb-6">
-                            <GraduationCap className="w-8 h-8 text-[#6d28d9]" />
+                        <div className="w-16 h-16 rounded-full flex items-center justify-center mb-6"
+                             style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
+                            <GraduationCap style={{ color: theme === 'light' ? 'var(--text-primary)' : '#6d28d9', width: '2rem', height: '2rem' }} />
                         </div>
-                        <h3 className="text-3xl font-bold text-white mb-4">National Experts</h3>
-                        <p className="text-[#777] max-w-2xl mx-auto">
+                        <h3 className="text-3xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>National Experts</h3>
+                        <p className="max-w-2xl mx-auto" style={{ color: 'var(--text-muted)' }}>
                             Leading AI professionals from University of Jammu supporting Vidyaraa's educational mission and research initiatives.
                         </p>
                     </motion.div>
 
-                    {/* Render National Experts in a centered 3-column layout */}
-                    <div className="max-w-7xl mx-auto">
-                        <div className="grid md:grid-cols-3 gap-8">
+                    {/* Render National Experts in 2-column layout */}
+                    <div className="max-w-6xl mx-auto">
+                        <div className="grid md:grid-cols-2 gap-8">
                             {nationalExperts.map((expert, idx) => (
                                 <motion.a
                                     key={idx}
@@ -132,38 +138,42 @@ const Experts = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true, margin: "-50px" }}
                                     transition={{ duration: 0.6, delay: idx * 0.2 }}
-                                    className="bg-[#050505] border border-white/5 hover:border-white/15 rounded-3xl p-8 transition-all group shadow-[0_4px_20px_transparent] hover:shadow-[0_4px_40px_rgba(255,255,255,0.02)] flex flex-col h-full cursor-pointer"
+                                    className="rounded-3xl p-8 transition-all group cursor-pointer"
+                                    style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--border-color)' }}
                                 >
-                                    <div className="flex items-center gap-4 mb-6">
+                                    <div className="flex items-start gap-6 mb-8">
                                         <div className="relative group/avatar shrink-0">
-                                            <div className="absolute -inset-2 bg-gradient-to-tr from-[#6d28d9]/20 to-indigo-500/20 rounded-2xl blur-xl opacity-0 group-hover/avatar:opacity-100 transition-opacity duration-500"></div>
-                                            <div className="relative w-16 h-16 rounded-2xl border-2 border-white/10 bg-[#111] flex items-center justify-center overflow-hidden group-hover/avatar:border-white/30 transition-all duration-500 transform group-hover/avatar:scale-105 group-hover/avatar:rotate-2 shadow-xl">
-                                                <div className="absolute inset-0 bg-gradient-to-tr from-[#6d28d9]/20 to-transparent opacity-0 group-hover/avatar:opacity-100 transition-opacity z-20"></div>
+                                            <div className="absolute -inset-2 rounded-2xl blur-xl opacity-0 group-hover/avatar:opacity-100 transition-opacity duration-500"
+                                                 style={{ background: theme === 'light' ? 'linear-gradient(to top right, rgba(249, 115, 22, 0.2), rgba(251, 146, 60, 0.2))' : 'linear-gradient(to top right, rgba(109, 40, 217, 0.2), rgba(99, 102, 241, 0.2))' }}></div>
+                                            <div className="relative w-20 h-20 rounded-2xl border-2 flex items-center justify-center overflow-hidden transition-all duration-500 transform group-hover/avatar:scale-105 group-hover/avatar:rotate-3 shadow-2xl"
+                                                 style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border-color)' }}>
+                                                <div className="absolute inset-0 opacity-0 group-hover/avatar:opacity-100 transition-opacity z-20"
+                                                     style={{ background: theme === 'light' ? 'linear-gradient(to top right, rgba(249, 115, 22, 0.2), transparent)' : 'linear-gradient(to top right, rgba(109, 40, 217, 0.2), transparent)' }}></div>
                                                 {expert.image ? (
                                                     <img src={expert.image} alt={expert.name} className="w-full h-full object-cover relative z-10" />
                                                 ) : (
-                                                    <User className="w-7 h-7 text-[#555] group-hover/avatar:text-white transition-colors relative z-10" />
+                                                    <User className="w-8 h-8 transition-colors relative z-10" style={{ color: 'var(--text-muted)' }} />
                                                 )}
                                                 {/* Corner accents */}
-                                                <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-white/20 rounded-tl-md z-30"></div>
-                                                <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-white/20 rounded-br-md z-30"></div>
+                                                <div className="absolute top-0 left-0 w-3 h-3 border-t border-l rounded-tl-md z-30" style={{ borderColor: 'var(--border-color)' }}></div>
+                                                <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r rounded-br-md z-30" style={{ borderColor: 'var(--border-color)' }}></div>
                                             </div>
                                         </div>
                                         <div>
-                                            <h4 className="text-xl font-bold text-white">{expert.name}</h4>
+                                            <h4 className="text-2xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>{expert.name}</h4>
+                                            <p className="text-sm leading-relaxed flex gap-2" style={{ color: theme === 'light' ? '#c2410c' : '#c084fc' }}>
+                                                <Building2 className="w-4 h-4 shrink-0 mt-0.5" />
+                                                <span>{expert.affiliation}</span>
+                                            </p>
                                         </div>
                                     </div>
 
-                                    <p className="text-[#a78bfa] text-sm leading-relaxed flex gap-2 mb-6">
-                                        <Building2 className="w-4 h-4 shrink-0 mt-0.5" />
-                                        <span>{expert.affiliation}</span>
-                                    </p>
-
-                                    <div className="mt-auto pt-6 border-t border-white/[0.05]">
-                                        <p className="text-[10px] font-bold text-[#555] uppercase tracking-widest mb-4">Expertise</p>
+                                    <div className="pt-6" style={{ borderTop: '1px solid var(--border-color)' }}>
+                                        <p className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: 'var(--text-muted)' }}>Expertise</p>
                                         <div className="flex flex-wrap gap-2">
                                             {expert.expertise.map((tag, tagIdx) => (
-                                                <span key={tagIdx} className="px-3 py-1 rounded-lg border border-white/5 bg-white/[0.02] text-xs text-[#a1a1aa] font-medium">
+                                                <span key={tagIdx} className="px-3 py-1 rounded-lg border text-xs font-medium"
+                                                      style={{ borderColor: 'var(--border-color)', backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-muted)' }}>
                                                     {tag}
                                                 </span>
                                             ))}
@@ -185,11 +195,12 @@ const Experts = () => {
                         transition={{ duration: 0.8 }}
                         className="flex flex-col items-center text-center mb-16"
                     >
-                        <div className="w-16 h-16 rounded-full bg-[#111] border border-white/10 flex items-center justify-center mb-6">
-                            <Globe className="w-8 h-8 text-[#a78bfa]" />
+                        <div className="w-16 h-16 rounded-full flex items-center justify-center mb-6"
+                             style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
+                            <Globe style={{ color: theme === 'light' ? '#f97316' : '#a78bfa', width: '2rem', height: '2rem' }} />
                         </div>
-                        <h3 className="text-3xl font-bold text-white mb-4">International Experts</h3>
-                        <p className="text-[#777] max-w-2xl mx-auto">
+                        <h3 className="text-3xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>International Experts</h3>
+                        <p className="max-w-2xl mx-auto" style={{ color: 'var(--text-muted)' }}>
                             World-renowned AI experts collaborating with Vidyaraa to bring cutting-edge knowledge and global perspectives.
                         </p>
                     </motion.div>
@@ -205,37 +216,42 @@ const Experts = () => {
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true, margin: "-50px" }}
                                 transition={{ duration: 0.6, delay: idx * 0.1 }}
-                                className="bg-[#050505] border border-white/10 rounded-3xl p-8 hover:border-white/20 transition-all group cursor-pointer"
+                                className="rounded-3xl p-8 transition-all group cursor-pointer"
+                                style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--border-color)' }}
                             >
                                 <div className="flex items-start gap-6 mb-8">
                                     <div className="relative group/avatar shrink-0">
-                                        <div className="absolute -inset-2 bg-gradient-to-tr from-[#6d28d9]/20 to-indigo-500/20 rounded-2xl blur-xl opacity-0 group-hover/avatar:opacity-100 transition-opacity duration-500"></div>
-                                        <div className="relative w-20 h-20 rounded-2xl border-2 border-white/10 bg-[#111] flex items-center justify-center overflow-hidden group-hover/avatar:border-white/30 transition-all duration-500 transform group-hover/avatar:scale-105 group-hover/avatar:rotate-3 shadow-2xl">
-                                            <div className="absolute inset-0 bg-gradient-to-tr from-[#6d28d9]/20 to-transparent opacity-0 group-hover/avatar:opacity-100 transition-opacity z-20"></div>
+                                        <div className="absolute -inset-2 rounded-2xl blur-xl opacity-0 group-hover/avatar:opacity-100 transition-opacity duration-500"
+                                             style={{ background: theme === 'light' ? 'linear-gradient(to top right, rgba(249, 115, 22, 0.2), rgba(251, 146, 60, 0.2))' : 'linear-gradient(to top right, rgba(109, 40, 217, 0.2), rgba(99, 102, 241, 0.2))' }}></div>
+                                        <div className="relative w-20 h-20 rounded-2xl border-2 flex items-center justify-center overflow-hidden transition-all duration-500 transform group-hover/avatar:scale-105 group-hover/avatar:rotate-3 shadow-2xl"
+                                             style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border-color)' }}>
+                                            <div className="absolute inset-0 opacity-0 group-hover/avatar:opacity-100 transition-opacity z-20"
+                                                 style={{ background: theme === 'light' ? 'linear-gradient(to top right, rgba(249, 115, 22, 0.2), transparent)' : 'linear-gradient(to top right, rgba(109, 40, 217, 0.2), transparent)' }}></div>
                                             {expert.image ? (
                                                 <img src={expert.image} alt={expert.name} className="w-full h-full object-cover relative z-10" />
                                             ) : (
-                                                <User className="w-8 h-8 text-[#555] group-hover/avatar:text-white transition-colors relative z-10" />
+                                                <User className="w-8 h-8 transition-colors relative z-10" style={{ color: 'var(--text-muted)' }} />
                                             )}
                                             {/* Corner accents */}
-                                            <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-white/20 rounded-tl-md z-30"></div>
-                                            <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-white/20 rounded-br-md z-30"></div>
+                                            <div className="absolute top-0 left-0 w-3 h-3 border-t border-l rounded-tl-md z-30" style={{ borderColor: 'var(--border-color)' }}></div>
+                                            <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r rounded-br-md z-30" style={{ borderColor: 'var(--border-color)' }}></div>
                                         </div>
                                     </div>
                                     <div>
-                                        <h4 className="text-2xl font-bold text-white mb-2">{expert.name}</h4>
-                                        <p className="text-[#a78bfa] text-sm leading-relaxed flex gap-2">
+                                        <h4 className="text-2xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>{expert.name}</h4>
+                                        <p className="text-sm leading-relaxed flex gap-2" style={{ color: theme === 'light' ? '#c2410c' : '#c084fc' }}>
                                             <Building2 className="w-4 h-4 shrink-0 mt-0.5" />
                                             <span>{expert.affiliation}</span>
                                         </p>
                                     </div>
                                 </div>
 
-                                <div className="pt-6 border-t border-white/[0.05]">
-                                    <p className="text-xs font-bold text-[#555] uppercase tracking-widest mb-4">Expertise</p>
+                                <div className="pt-6" style={{ borderTop: '1px solid var(--border-color)' }}>
+                                    <p className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: 'var(--text-muted)' }}>Expertise</p>
                                     <div className="flex flex-wrap gap-2">
                                         {expert.expertise.map((tag, tagIdx) => (
-                                            <span key={tagIdx} className="px-3 py-1 rounded-lg border border-white/5 bg-white/[0.02] text-xs text-[#a1a1aa] font-medium">
+                                            <span key={tagIdx} className="px-3 py-1 rounded-lg border text-xs font-medium"
+                                                  style={{ borderColor: 'var(--border-color)', backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-muted)' }}>
                                                 {tag}
                                             </span>
                                         ))}

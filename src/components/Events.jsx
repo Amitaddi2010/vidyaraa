@@ -4,37 +4,39 @@ import { Calendar, MapPin, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import TextReveal from './TextReveal';
 import GradientMesh from './GradientMesh';
+import { useTheme } from '../context/ThemeContext';
 
 const Events = () => {
+    const { theme } = useTheme();
     const events = [
         {
-            type: "Workshop",
-            title: "One Day Workshop on AI Tools",
-            date: "March 18, 2026",
-            location: "Bhaderwah Campus",
-            status: "Registered",
-            active: false
-        },
-        {
-            type: "Workshop",
-            title: "One DayWorkshop on Google AI Tools",
-            date: "April 11, 2026",
-            location: "University of Jammu",
-            status: "Opening Registration Soon",
+            type: "Partnership",
+            title: "Something BIG",
+            date: "May 2026",
+            location: "Jammu",
+            status: "Coming Soon",
             active: true
         },
         {
-            type: "Event",
-            title: "Something BIG",
-            date: "April",
-            location: "Multiple Locations",
-            status: "Planning",
+            type: "Workshop",
+            title: "Build with AI: Workshop on Google AI Tools",
+            date: "April 11, 2026",
+            location: "University of Jammu - Department of Computer Science & IT",
+            status: "Completed",
+            active: false
+        },
+        {
+            type: "Workshop",
+            title: "AI Tools Masterclass",
+            date: "March 18, 2026",
+            location: "Department of CS & IT, Bhaderwah Campus",
+            status: "Completed",
             active: false
         }
-    ];
+    ].sort((a, b) => new Date(b.date) - new Date(a.date));
 
     return (
-        <section id="events" className="py-16 md:py-24 lg:py-32 bg-[#020202] border-t border-white/[0.02] relative overflow-hidden">
+        <section id="events" className="py-16 md:py-24 lg:py-32 border-t relative overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border-color)' }}>
             <GradientMesh variant="subtle" />
             <div className="max-w-7xl mx-auto px-6 relative z-10">
 
@@ -46,15 +48,18 @@ const Events = () => {
                     className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16 gap-6 md:gap-8"
                 >
                     <div className="max-w-xl">
-                        <TextReveal className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 tracking-tight">Upcoming Events</TextReveal>
-                        <p className="text-[#888888] text-lg leading-relaxed">
+                        <TextReveal className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight" style={{ color: 'var(--text-primary)' }}>Upcoming Events</TextReveal>
+                        <p className="text-lg leading-relaxed" style={{ color: 'var(--text-muted)' }}>
                             Join us at our upcoming hackathons, workshops, and meetups to connect, learn, and build real-world AI projects.
                         </p>
                     </div>
-                    <button className="group px-6 py-3 rounded-full bg-transparent border border-white/10 text-white font-medium hover:bg-white/5 transition-all flex items-center gap-2 shrink-0">
+                    <Link 
+                        to="/events" 
+                        className="group px-6 py-3 rounded-full bg-transparent border font-medium hover:bg-white/5 transition-all flex items-center gap-2 shrink-0"
+                        style={{ borderColor: 'var(--border-color)', color: 'var(--text-primary)' }}>
                         View All Events
                         <ArrowRight className="w-4 h-4 translate-x-0 group-hover:translate-x-1 transition-transform" />
-                    </button>
+                    </Link>
                 </motion.div>
 
                 <div className="grid lg:grid-cols-3 gap-6">
@@ -65,39 +70,47 @@ const Events = () => {
                             viewport={{ once: true, margin: "-100px" }}
                             transition={{ duration: 0.6, delay: idx * 0.1 }}
                             key={idx}
-                            className="bg-[#050505] rounded-3xl p-1 border border-white/5 hover:border-white/15 hover:-translate-y-2 transition-all duration-300 group hover:shadow-[0_0_30px_rgba(255,255,255,0.02)]"
+                            className="rounded-3xl p-1 border hover:-translate-y-2 transition-all duration-300 group"
+                            style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border-color)', boxShadow: '0 0 30px rgba(0,0,0,0.02)' }}
                         >
-                            <div className="bg-[#0A0A0A] rounded-[1.4rem] p-8 h-full flex flex-col justify-between relative overflow-hidden">
+                            <div className="rounded-[1.4rem] p-8 h-full flex flex-col justify-between relative overflow-hidden"
+                                 style={{ backgroundColor: 'var(--card-bg)' }}>
 
                                 {/* Subtle highlight if active */}
                                 {evt.active && (
-                                    <div className="absolute top-0 right-0 w-32 h-32 bg-[#6d28d9]/20 rounded-full blur-[40px] pointer-events-none"></div>
+                                    <div className="absolute top-0 right-0 w-32 h-32 rounded-full blur-[40px] pointer-events-none"
+                                         style={{ backgroundColor: theme === 'light' ? 'rgba(249, 115, 22, 0.2)' : 'rgba(109, 40, 217, 0.2)' }}></div>
                                 )}
 
                                 <div className="relative z-10">
                                     <div className="flex justify-between items-start mb-8">
-                                        <span className="px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase border border-white/10 text-[#a1a1aa] bg-white/5">
+                                        <span className="px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase border"
+                                              style={{ borderColor: 'var(--border-color)', color: 'var(--text-muted)', backgroundColor: 'var(--bg-tertiary)' }}>
                                             {evt.type}
                                         </span>
-                                        <span className={`text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full border ${evt.active ? 'border-[#6d28d9]/50 text-[#a78bfa] bg-[#6d28d9]/10' : 'border-white/5 text-[#555]'}`}>
+                                        <span className={`text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full border ${evt.active ? (theme === 'light' ? 'border-orange-500/50 text-orange-600 bg-orange-500/10' : 'border-purple-600/50 text-purple-400 bg-purple-600/10') : ''}`}
+                                              style={evt.active ? {} : { borderColor: 'var(--border-color)', color: 'var(--text-muted)', backgroundColor: 'var(--bg-tertiary)' }}>
                                             {evt.status}
                                         </span>
                                     </div>
 
-                                    <h3 className="text-2xl font-bold text-white mb-6 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-[#94a3b8] transition-all">
+                                    <h3 className="text-2xl font-bold mb-6 transition-all"
+                                        style={{ color: 'var(--text-primary)' }}>
                                         {evt.title}
                                     </h3>
 
                                     <div className="space-y-4 mb-10">
-                                        <div className="flex items-center gap-3 text-[#777777] text-sm font-medium">
-                                            <div className="w-8 h-8 rounded-lg bg-[#111] border border-white/5 flex items-center justify-center">
-                                                <Calendar className="w-4 h-4 text-white" />
+                                        <div className="flex items-center gap-3 text-sm font-medium" style={{ color: 'var(--text-muted)' }}>
+                                            <div className="w-8 h-8 rounded-lg flex items-center justify-center"
+                                                 style={{ backgroundColor: 'var(--bg-tertiary)', border: '1px solid var(--border-color)' }}>
+                                                <Calendar style={{ color: 'var(--text-primary)' }} />
                                             </div>
                                             <span>{evt.date}</span>
                                         </div>
-                                        <div className="flex items-center gap-3 text-[#777777] text-sm font-medium">
-                                            <div className="w-8 h-8 rounded-lg bg-[#111] border border-white/5 flex items-center justify-center">
-                                                <MapPin className="w-4 h-4 text-white" />
+                                        <div className="flex items-center gap-3 text-sm font-medium" style={{ color: 'var(--text-muted)' }}>
+                                            <div className="w-8 h-8 rounded-lg flex items-center justify-center"
+                                                 style={{ backgroundColor: 'var(--bg-tertiary)', border: '1px solid var(--border-color)' }}>
+                                                <MapPin style={{ color: 'var(--text-primary)' }} />
                                             </div>
                                             <span>{evt.location}</span>
                                         </div>
@@ -105,16 +118,18 @@ const Events = () => {
                                 </div>
 
                                 <Link 
-                                    to="/contact" 
-                                    className="relative z-10 w-full py-4 rounded-xl bg-white/5 hover:bg-white text-white hover:text-black font-bold transition-colors border border-white/10 uppercase tracking-widest text-xs block text-center"
+                                    to="/events" 
+                                    className="relative z-10 w-full py-4 rounded-xl font-bold transition-colors border uppercase tracking-widest text-xs block text-center hover:opacity-80"
+                                    style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-primary)', borderColor: 'var(--border-color)' }}
                                 >
-                                    Contact for more details
+                                    View Details
                                 </Link>
                             </div>
                         </motion.div>
                     ))}
                 </div>
 
+                
             </div>
         </section>
     );

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Send, Linkedin, Phone } from 'lucide-react';
+import { Mail, MapPin, Linkedin, Send } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 import emailjs from 'emailjs-com';
 
 const Contact = () => {
+    const { theme } = useTheme();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -101,10 +103,12 @@ const Contact = () => {
     };
 
     return (
-        <div className="bg-[#020202] min-h-screen py-32 px-6 relative overflow-hidden">
-            {/* Background Glows */}
-            <div className="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none"></div>
-            <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div className="min-h-screen py-32 px-6 relative overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)' }}>
+            {/* Background Glows - Orange for light theme */}
+            <div className="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full blur-[120px] pointer-events-none"
+                 style={{ backgroundColor: theme === 'light' ? 'rgba(249, 115, 22, 0.1)' : 'rgba(147, 51, 234, 0.1)' }}></div>
+            <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] rounded-full blur-[120px] pointer-events-none"
+                 style={{ backgroundColor: theme === 'light' ? 'rgba(251, 146, 60, 0.1)' : 'rgba(99, 102, 241, 0.1)' }}></div>
 
             <div className="max-w-7xl mx-auto relative z-10">
                 <div className="grid lg:grid-cols-2 gap-20 items-start">
@@ -120,43 +124,47 @@ const Contact = () => {
                             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                             viewport={{ once: true }}
                             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                            className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-8 tracking-tight leading-tight"
+                            className="text-4xl md:text-5xl lg:text-6xl font-black mb-8 tracking-tight leading-tight" style={{ color: 'var(--text-primary)' }}
                         >
-                            Let's Build the <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">AI Future</span> Together
+                            Let's Build the <span className="text-transparent bg-clip-text"
+                                style={{ backgroundImage: theme === 'light' ? 'linear-gradient(to right, #f97316, #fb923c)' : 'linear-gradient(to right, #c084fc, #818cf8)' }}>AI Future</span> Together
                         </motion.h1>
-                        <p className="text-slate-400 text-lg mb-12 max-w-lg leading-relaxed">
+                        <p className="text-lg mb-12 max-w-lg leading-relaxed" style={{ color: 'var(--text-muted)' }}>
                             Have questions about our initiatives, research collaborations, or want to join the Vidyaraa ecosystem? Reach out to our team.
                         </p>
 
                         <div className="space-y-8">
                             <div className="flex items-start gap-6 group">
-                                <div className="w-12 h-12 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-center group-hover:border-purple-500/50 transition-colors">
-                                    <Mail className="w-5 h-5 text-purple-400" />
+                                <div className="w-12 h-12 rounded-2xl flex items-center justify-center transition-colors"
+                                     style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
+                                    <Mail style={{ color: theme === 'light' ? '#f97316' : '#c084fc' }} />
                                 </div>
                                 <div>
-                                    <h4 className="text-white font-semibold mb-1">Email Us</h4>
-                                    <p className="text-slate-400">vidyaraaai@gmail.com</p>
+                                    <h4 style={{ color: 'var(--text-primary)' }}>Email Us</h4>
+                                    <p style={{ color: 'var(--text-muted)' }}>vidyaraaai@gmail.com</p>
                                 </div>
                             </div>
 
                             <div className="flex items-start gap-6 group">
-                                <div className="w-12 h-12 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-center group-hover:border-indigo-500/50 transition-colors">
-                                    <MapPin className="w-5 h-5 text-indigo-400" />
+                                <div className="w-12 h-12 rounded-2xl flex items-center justify-center transition-colors"
+                                     style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
+                                    <MapPin style={{ color: theme === 'light' ? '#f97316' : '#818cf8' }} />
                                 </div>
                                 <div>
-                                    <h4 className="text-white font-semibold mb-1">Regional Focus</h4>
-                                    <p className="text-slate-400">Jammu & Kashmir, India</p>
-                                    <p className="text-slate-500 text-sm">Empowering the next generation of AI innovators.</p>
+                                    <h4 style={{ color: 'var(--text-primary)' }}>Regional Focus</h4>
+                                    <p style={{ color: 'var(--text-muted)' }}>Jammu & Kashmir, India</p>
+                                    <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>Empowering the next generation of AI innovators.</p>
                                 </div>
                             </div>
 
                             <div className="flex items-start gap-6 group">
-                                <div className="w-12 h-12 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-center group-hover:border-purple-500/50 transition-colors">
-                                    <Linkedin className="w-5 h-5 text-purple-400" />
+                                <div className="w-12 h-12 rounded-2xl flex items-center justify-center transition-colors"
+                                     style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
+                                    <Linkedin style={{ color: theme === 'light' ? '#f97316' : '#c084fc' }} />
                                 </div>
                                 <div>
-                                    <h4 className="text-white font-semibold mb-1">Community</h4>
-                                    <p className="text-slate-400">Join our LinkedIn for real-time updates.</p>
+                                    <h4 style={{ color: 'var(--text-primary)' }}>Community</h4>
+                                    <p style={{ color: 'var(--text-muted)' }}>Join our LinkedIn for real-time updates.</p>
                                 </div>
                             </div>
                         </div>
@@ -169,41 +177,44 @@ const Contact = () => {
                         transition={{ duration: 0.8 }}
                         className="relative"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/10 to-indigo-500/10 blur-[80px] -z-10"></div>
+                        <div className="absolute inset-0 blur-[80px] -z-10"
+                             style={{ background: theme === 'light' ? 'linear-gradient(to top right, rgba(249, 115, 22, 0.1), rgba(251, 146, 60, 0.1))' : 'linear-gradient(to top right, rgba(168, 85, 247, 0.1), rgba(99, 102, 241, 0.1))' }}></div>
                         <div className="p-8 md:p-10 rounded-[32px] bg-white/[0.02] border border-white/[0.08] backdrop-blur-2xl shadow-2xl">
                             <form onSubmit={handleSubmit} className="space-y-6">
                                 <div className="grid md:grid-cols-2 gap-6">
                                     <div className="space-y-2">
-                                        <label className="text-sm font-medium text-slate-400 ml-1">Name</label>
+                                        <label className="text-sm font-medium ml-1" style={{ color: 'var(--text-muted)' }}>Name</label>
                                         <input
                                             type="text"
                                             name="name"
                                             value={formData.name}
                                             onChange={handleChange}
                                             placeholder="John Doe"
-                                            className={`w-full bg-white/[0.03] border rounded-2xl px-6 py-4 text-white placeholder:text-slate-600 focus:outline-none transition-colors ${
+                                            className={`w-full rounded-2xl px-6 py-4 focus:outline-none transition-colors ${
                                                 errors.name 
                                                     ? 'border-red-500/50 focus:border-red-500/50' 
-                                                    : 'border-white/10 focus:border-purple-500/50'
+                                                    : theme === 'light' ? 'border-orange-500/30 focus:border-orange-500/50' : 'border-purple-500/30 focus:border-purple-500/50'
                                             }`}
+                                            style={{ backgroundColor: 'var(--bg-secondary)', color: 'var(--text-primary)', borderColor: 'var(--border-color)' }}
                                         />
                                         {errors.name && (
                                             <p className="text-red-400 text-sm mt-1">{errors.name}</p>
                                         )}
                                     </div>
                                     <div className="space-y-2">
-                                        <label className="text-sm font-medium text-slate-400 ml-1">Email</label>
+                                        <label className="text-sm font-medium ml-1" style={{ color: 'var(--text-muted)' }}>Email</label>
                                         <input
                                             type="email"
                                             name="email"
                                             value={formData.email}
                                             onChange={handleChange}
                                             placeholder="john@example.com"
-                                            className={`w-full bg-white/[0.03] border rounded-2xl px-6 py-4 text-white placeholder:text-slate-600 focus:outline-none transition-colors ${
+                                            className={`w-full rounded-2xl px-6 py-4 focus:outline-none transition-colors ${
                                                 errors.email 
                                                     ? 'border-red-500/50 focus:border-red-500/50' 
-                                                    : 'border-white/10 focus:border-purple-500/50'
+                                                    : theme === 'light' ? 'border-orange-500/30 focus:border-orange-500/50' : 'border-purple-500/30 focus:border-purple-500/50'
                                             }`}
+                                            style={{ backgroundColor: 'var(--bg-secondary)', color: 'var(--text-primary)', borderColor: 'var(--border-color)' }}
                                         />
                                         {errors.email && (
                                             <p className="text-red-400 text-sm mt-1">{errors.email}</p>
@@ -212,18 +223,19 @@ const Contact = () => {
                                 </div>
 
                                 <div className="space-y-2">
-                                    <label className="text-sm font-medium text-slate-400 ml-1">Message</label>
+                                    <label className="text-sm font-medium ml-1" style={{ color: 'var(--text-muted)' }}>Message</label>
                                     <textarea
                                         name="message"
                                         value={formData.message}
                                         onChange={handleChange}
                                         rows="5"
                                         placeholder="How can we help you?"
-                                        className={`w-full bg-white/[0.03] border rounded-2xl px-6 py-4 text-white placeholder:text-slate-600 focus:outline-none transition-colors resize-none ${
+                                        className={`w-full rounded-2xl px-6 py-4 focus:outline-none transition-colors resize-none ${
                                             errors.message 
                                                 ? 'border-red-500/50 focus:border-red-500/50' 
-                                                : 'border-white/10 focus:border-purple-500/50'
-                                        }`}
+                                                : theme === 'light' ? 'border-orange-500/30 focus:border-orange-500/50' : 'border-purple-500/30 focus:border-purple-500/50'
+                                            }`}
+                                        style={{ backgroundColor: 'var(--bg-secondary)', color: 'var(--text-primary)', borderColor: 'var(--border-color)' }}
                                     ></textarea>
                                     {errors.message && (
                                         <p className="text-red-400 text-sm mt-1">{errors.message}</p>
@@ -231,28 +243,29 @@ const Contact = () => {
                                 </div>
 
                                 {submitStatus === 'success' && (
-                                    <div className="p-4 rounded-2xl bg-green-500/10 border border-green-500/20">
-                                        <p className="text-green-400 text-center">Message sent successfully! We'll get back to you soon.</p>
+                                    <div className="p-4 rounded-2xl" style={{ backgroundColor: theme === 'light' ? 'rgba(34, 197, 94, 0.1)' : 'rgba(34, 197, 94, 0.1)', borderColor: theme === 'light' ? 'rgba(34, 197, 94, 0.2)' : 'rgba(34, 197, 94, 0.2)', borderWidth: '1px', borderStyle: 'solid' }}>
+                                        <p style={{ color: theme === 'light' ? '#16a34a' : '#4ade80' }} className="text-center">Message sent successfully! We'll get back to you soon.</p>
                                     </div>
                                 )}
                                 
                                 {submitStatus === 'error' && (
-                                    <div className="p-4 rounded-2xl bg-red-500/10 border border-red-500/20">
-                                        <p className="text-red-400 text-center">Failed to send message. Please try again.</p>
+                                    <div className="p-4 rounded-2xl" style={{ backgroundColor: theme === 'light' ? 'rgba(239, 68, 68, 0.1)' : 'rgba(239, 68, 68, 0.1)', borderColor: theme === 'light' ? 'rgba(239, 68, 68, 0.2)' : 'rgba(239, 68, 68, 0.2)', borderWidth: '1px', borderStyle: 'solid' }}>
+                                        <p style={{ color: theme === 'light' ? '#dc2626' : '#f87171' }} className="text-center">Failed to send message. Please try again.</p>
                                     </div>
                                 )}
 
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className="w-full group relative px-8 py-5 rounded-2xl bg-white text-black font-bold text-lg overflow-hidden transition-transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                                    className="w-full group relative px-8 py-5 rounded-2xl font-bold text-lg overflow-hidden transition-transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                                    style={{ backgroundColor: theme === 'light' ? '#f97316' : '#8b5cf6', color: '#ffffff' }}
                                 >
                                     <span className="relative z-10 flex items-center justify-center gap-3">
                                         {isSubmitting ? 'Sending...' : 'Send Message'}
                                         <Send className="w-5 h-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                                     </span>
                                 </button>
-                                <p className="text-center text-slate-500 text-sm">
+                                <p className="text-center text-sm" style={{ color: 'var(--text-muted)' }}>
                                     Our team typically responds within 24-48 hours.
                                 </p>
                             </form>
