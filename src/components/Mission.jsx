@@ -1,14 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { motion, useMotionValue, useSpring, useTransform, animate } from 'framer-motion';
-import { Target, Lightbulb, Rocket } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Target, Lightbulb, Rocket, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
+
+const images = [
+  'https://picsum.photos/200/300',
+  'https://picsum.photos/200/301',
+  'https://picsum.photos/200/302',
+  'https://picsum.photos/200/303',
+  'https://picsum.photos/200/304',
+];
 
 const AnimatedNumber = ({ value, duration = 2 }) => {
-    const [displayValue, setDisplayValue] = useState(0);
-    const count = useMotionValue(0);
-    const rounded = useTransform(count, (latest) => Math.round(latest));
+  const [displayValue, setDisplayValue] = useState(0);
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) => Math.round(latest));
 
-    useEffect(() => {
-        const controls = animate(count, value, { duration, ease: "easeOut" });
+  useEffect(() => {
+    const controls = animate(count, value, { duration, ease: "easeOut" });
+    return controls.stop;
+  }, [value, duration]);
         return controls.stop;
     }, [value, duration]);
 

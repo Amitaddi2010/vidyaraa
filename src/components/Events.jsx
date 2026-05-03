@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, MapPin, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import TextReveal from './TextReveal';
 import GradientMesh from './GradientMesh';
 import { useTheme } from '../context/ThemeContext';
 
 const Events = () => {
     const { theme } = useTheme();
+    const navigate = useNavigate();
     const events = [
         {
             type: "Partnership",

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useRef } from 'react';
+import { motion, AnimatePresence, useDragControls } from 'framer-motion';
 import { Cpu, Code, BookOpen, Users, ChevronRight, ChevronLeft } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
@@ -80,6 +80,25 @@ const Card = ({ program, index, total, activeIndex, setActiveIndex }) => {
 const Programs = () => {
     const { theme } = useTheme();
     const [activeIndex, setActiveIndex] = useState(0);
+    const dragControls = useDragControls();
+    const containerRef = useRef(null);
+
+    const nextCard = () => {
+        setActiveIndex((prev) => (prev + 1) % programs.length);
+    };
+
+    const prevCard = () => {
+        setActiveIndex((prev) => (prev - 1 + programs.length) % programs.length);
+    };
+
+    const handleDragEnd = (event, info) => {
+        const dragThreshold = 50;
+        if (info.offset.x > dragThreshold) {
+            prevCard();
+        } else if (info.offset.x < -dragThreshold) {
+            nextCard();
+        }
+    };
 
     const programs = [
         {
@@ -111,9 +130,6 @@ const Programs = () => {
             color: theme === 'light' ? "from-orange-500/10 to-transparent" : "from-purple-500/10 to-transparent",
         }
     ];
-
-    const nextCard = () => setActiveIndex((prev) => (prev + 1) % programs.length);
-    const prevCard = () => setActiveIndex((prev) => (prev - 1 + programs.length) % programs.length);
 
     return (
         <section id="programs" className="py-16 md:py-24 lg:py-32 relative border-t overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border-color)' }}>
@@ -164,6 +180,7 @@ const Programs = () => {
                                     total={programs.length}
                                     activeIndex={activeIndex}
                                     setActiveIndex={setActiveIndex}
+                                    dragControls={dragControls}
                                 />
                             ))}
                         </div>

@@ -65,6 +65,26 @@ const Experts = () => {
             expertise: ["Computer Vision", "Medical Imaging", "MRI Analysis", "Deep Learning", "AI in Healthcare"],
             image: "/experts/ajay.jpg",
             portfolio: "https://ajaychem12.github.io/sharma-lab-website/team.html"
+        },
+        {
+            name: "Dr. Inderpal Singh Bijral",
+            affiliation: "Scientist, Canary Cure Therapeutics, Vancouver, British Columbia, Canada",
+            expertise: [
+                "Drug Discovery", 
+                "Obesity Research", 
+                "Rare Diseases", 
+                "Drug Design", 
+                "RNAi & mRNA Therapeutics", 
+                "Pre-clinical Studies", 
+                "Genomics", 
+                "Cell Biology", 
+                "Microbiology", 
+                "Protein Modelling and Molecular Dynamics Simulations", 
+                "Bioinformatics", 
+                "Whole Genome Sequencing"
+            ],
+            image: "/experts/inderpal.jpg",
+            portfolio: "https://www.linkedin.com/in/dr-inderpal-singh-bijral-635ba4184/"
         }
     ];
 
@@ -125,9 +145,9 @@ const Experts = () => {
                         </p>
                     </motion.div>
 
-                    {/* Render National Experts in 2-column layout */}
-                    <div className="max-w-6xl mx-auto">
-                        <div className="grid md:grid-cols-2 gap-8">
+                    {/* Render National Experts in 3-column layout */}
+                    <div className="max-w-7xl mx-auto">
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {nationalExperts.map((expert, idx) => (
                                 <motion.a
                                     key={idx}
@@ -205,7 +225,7 @@ const Experts = () => {
                         </p>
                     </motion.div>
 
-                    <div className="grid md:grid-cols-2 gap-8">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {internationalExperts.map((expert, idx) => (
                             <motion.a
                                 key={idx}

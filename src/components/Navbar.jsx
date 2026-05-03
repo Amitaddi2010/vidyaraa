@@ -190,87 +190,95 @@ const Navbar = () => {
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="lg:hidden absolute top-full left-0 w-full border-b overflow-hidden rounded-b-3xl mt-2 z-[100] backdrop-blur-xl"
+                        className="lg:hidden fixed inset-x-0 top-[72px] w-full h-[calc(100vh-72px)] border-b overflow-hidden z-[100] backdrop-blur-xl"
                         style={{ 
                             background: theme === 'light' 
-                                ? 'rgba(255, 255, 255, 0.85)'
-                                : 'rgba(10, 10, 10, 0.85)',
+                                ? 'rgba(255, 255, 255, 0.95)'
+                                : 'rgba(10, 10, 10, 0.95)',
                             borderColor: theme === 'light' ? 'rgba(249, 115, 22, 0.4)' : 'rgba(139, 92, 246, 0.4)'
                         }}
                     >
-                        <div className="flex flex-col px-6 py-6 space-y-4">
-                            {navLinks.map((link) => (
-                                <div key={link.name}>
-                                    {link.isExternal ? (
-                                        <Link
-                                            to={link.href}
-                                            onClick={() => setIsMobileMenuOpen(false)}
-                                            className="text-lg font-medium transition-colors block py-2"
-                                            style={{ color: 'var(--text-secondary)' }}
-                                        >
-                                            {link.name}
-                                        </Link>
-                                    ) : (
-                                        <a
-                                            href={link.href}
-                                            onTouchStart={(e) => {
-                                                e.preventDefault();
-                                                scrollToSection(e, link.href);
-                                            }}
-                                            onClick={(e) => scrollToSection(e, link.href)}
-                                            className="text-lg font-medium transition-colors block py-2"
-                                            style={{ color: 'var(--text-secondary)' }}
-                                        >
-                                            {link.name}
-                                        </a>
-                                    )}
+                        <div className="h-full overflow-y-auto">
+                            <div className="flex flex-col px-4 py-6 space-y-2 max-w-md mx-auto">
+                                {navLinks.map((link) => (
+                                    <div key={link.name}>
+                                        {link.isExternal ? (
+                                            <Link
+                                                to={link.href}
+                                                onClick={() => setIsMobileMenuOpen(false)}
+                                                className="text-base sm:text-lg font-medium transition-colors block py-3 px-4 rounded-lg hover:bg-opacity-10"
+                                                style={{ color: 'var(--text-secondary)' }}
+                                            >
+                                                {link.name}
+                                            </Link>
+                                        ) : (
+                                            <a
+                                                href={link.href}
+                                                onTouchStart={(e) => {
+                                                    e.preventDefault();
+                                                    scrollToSection(e, link.href);
+                                                }}
+                                                onClick={(e) => {
+                                                    scrollToSection(e, link.href);
+                                                    setIsMobileMenuOpen(false);
+                                                }}
+                                                className="text-base sm:text-lg font-medium transition-colors block py-3 px-4 rounded-lg hover:bg-opacity-10"
+                                                style={{ color: 'var(--text-secondary)' }}
+                                            >
+                                                {link.name}
+                                            </a>
+                                        )}
+                                    </div>
+                                ))}
+                                <div className="pt-4 pb-2">
+                                    <a
+                                        href="#survey"
+                                        onTouchStart={(e) => {
+                                            e.preventDefault();
+                                            scrollToSection(e, '#survey');
+                                        }}
+                                        onClick={(e) => {
+                                            scrollToSection(e, '#survey');
+                                            setIsMobileMenuOpen(false);
+                                        }}
+                                        className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-bold transition-transform active:scale-[0.98] text-sm sm:text-base"
+                                        style={{ 
+                                            backgroundColor: theme === 'light' ? '#f97316' : '#8b5cf6',
+                                            color: '#ffffff'
+                                        }}
+                                    >
+                                        <span className="text-center">Take the AI Ecosystem Survey</span>
+                                        <ChevronRight className="w-4 h-4 flex-shrink-0" />
+                                    </a>
                                 </div>
-                            ))}
-                            <div className="pt-2">
-                                <a
-                                    href="#survey"
-                                    onTouchStart={(e) => {
-                                        e.preventDefault();
-                                        scrollToSection(e, '#survey');
-                                    }}
-                                    onClick={(e) => scrollToSection(e, '#survey')}
-                                    className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold transition-transform active:scale-[0.98]"
-                                    style={{ 
-                                        backgroundColor: theme === 'light' ? '#f97316' : '#8b5cf6',
-                                        color: '#ffffff'
-                                    }}
-                                >
-                                    Take the AI Ecosystem Survey
-                                    <ChevronRight className="w-4 h-4" />
-                                </a>
-                            </div>
 
-                            {/* Mobile Theme Toggle */}
-                            <div className="pt-4 border-t" style={{ borderColor: theme === 'light' ? 'rgba(249, 115, 22, 0.2)' : 'rgba(139, 92, 246, 0.3)' }}>
-                                <button
-                                    onClick={() => {
-                                        toggleTheme();
-                                        setIsMobileMenuOpen(false);
-                                    }}
-                                    className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl border font-medium transition-all"
-                                    style={{ 
-                                        borderColor: theme === 'light' ? 'rgba(249, 115, 22, 0.3)' : 'rgba(139, 92, 246, 0.4)',
-                                        color: theme === 'light' ? '#c2410c' : '#c4b5fd',
-                                        backgroundColor: theme === 'light' ? 'rgba(249, 115, 22, 0.1)' : 'rgba(139, 92, 246, 0.1)'
-                                    }}
-                                >
-                                    {theme === 'light' ? (
-                                        <>
-                                            <Moon className="w-5 h-5" />
-                                            <span>Switch to Dark Mode</span>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <Sun className="w-5 h-5" />
-                                            <span>Switch to Light Mode</span>
-                                        </>
-                                    )}
-                                </button>
+                                {/* Mobile Theme Toggle */}
+                                <div className="pt-2 border-t" style={{ borderColor: theme === 'light' ? 'rgba(249, 115, 22, 0.2)' : 'rgba(139, 92, 246, 0.3)' }}>
+                                    <button
+                                        onClick={() => {
+                                            toggleTheme();
+                                            setIsMobileMenuOpen(false);
+                                        }}
+                                        className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl border font-medium transition-all text-sm sm:text-base"
+                                        style={{ 
+                                            borderColor: theme === 'light' ? 'rgba(249, 115, 22, 0.3)' : 'rgba(139, 92, 246, 0.4)',
+                                            color: theme === 'light' ? '#c2410c' : '#c4b5fd',
+                                            backgroundColor: theme === 'light' ? 'rgba(249, 115, 22, 0.1)' : 'rgba(139, 92, 246, 0.1)'
+                                        }}
+                                    >
+                                        {theme === 'light' ? (
+                                            <>
+                                                <Moon className="w-5 h-5 flex-shrink-0" />
+                                                <span className="text-center">Dark Mode</span>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Sun className="w-5 h-5 flex-shrink-0" />
+                                                <span className="text-center">Light Mode</span>
+                                            </>
+                                        )}
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </motion.div>
