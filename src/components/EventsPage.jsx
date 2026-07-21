@@ -22,11 +22,11 @@ const EventsPage = () => {
             status: "Coming Soon",
             active: true,
             image: "/events/partnership/question-mark.jpg",
-            description: "A major partnership announcement that will reshape AI education in Jammu & Kashmir. The future is coming.",
+            description: "A major partnership announcement that will reshape AI education in India. The future is coming.",
             highlights: [
                 "Revolutionary collaboration",
                 "Game-changing impact",
-                "First-of-its-kind for J&K"
+                "First-of-its-kind for India"
             ],
             registrationLink: null,
             capacity: 0,

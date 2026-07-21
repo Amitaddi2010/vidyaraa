@@ -1,14 +1,14 @@
 <div align="center">
   <img src="public/favicon.png" alt="Vidyaraa Logo" width="120" height="120" />
   <h1>Vidyaraa AI Portal</h1>
-  <p><strong>Building the Artificial Intelligence Ecosystem of Jammu & Kashmir</strong></p>
+  <p><strong>Building the Artificial Intelligence Ecosystem of India</strong></p>
 </div>
 
 <br />
 
 ## 🌟 Overview
 
-Vidyaraa is a pioneering initiative focused on establishing Jammu & Kashmir as a premier hub for Artificial Intelligence. The Vidyaraa AI Portal serves as the central nexus for student talent, academic research, and industry collaboration, empowering the next generation of AI leaders.
+Vidyaraa is a pioneering initiative focused on establishing India as a premier hub for Artificial Intelligence. The Vidyaraa AI Portal serves as the central nexus for student talent, academic research, and industry collaboration, empowering the next generation of AI leaders.
 
 This front-end application features a world-class, immersive UI/UX built with React, styled with Tailwind CSS, and powered by high-performance animations using Framer Motion and Lenis scroll.
 
@@ -103,5 +103,5 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 <div align="center">
-  <p>Engineered for the future of AI in J&K • <a href="https://vidyaraa.ai">Vidyaraa.ai</a></p>
+  <p>Engineered for the future of AI in India • <a href="https://vidyaraa.ai">Vidyaraa.ai</a></p>
 </div>

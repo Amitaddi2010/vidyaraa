@@ -11,7 +11,7 @@ const Team = () => {
         {
             name: "Rahul Sharma",
             role: "CEO",
-            bio: "Leading the strategic vision and growth of the Vidyaraa AI Initiative across J&K.",
+            bio: "Leading the strategic vision and growth of the Vidyaraa AI Initiative across India.",
             image: "/team/rahul.jpg",
             social: {
                 linkedin: "https://www.linkedin.com/in/rahul-sharma15/",
@@ -61,7 +61,7 @@ const Team = () => {
                     </span>
                     <TextReveal className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight justify-center" style={{ color: 'var(--text-primary)' }} delay={0.1}>Meet the Team</TextReveal>
                     <p className="text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-                        Meet the brilliant minds behind Vidyaraa, dedicated to innovation and excellence in establishing Jammu & Kashmir as a premier AI hub.
+                        Meet the brilliant minds behind Vidyaraa, dedicated to innovation and excellence in establishing India as a premier AI hub.
                     </p>
                 </motion.div>
 

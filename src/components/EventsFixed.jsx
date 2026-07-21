@@ -23,12 +23,12 @@ const Events = () => {
             status: "Coming Soon",
             active: true,
             image: "/events/partnership/question-mark.jpg",
-            description: "An exciting partnership announcement that will revolutionize AI in Jammu & Kashmir.",
+            description: "An exciting partnership announcement that will revolutionize AI in India.",
             highlights: [
                 "Strategic collaboration",
                 "Industry-leading partnership",
                 "Game-changing impact",
-                "First-of-its-kind for J&K"
+                "First-of-its-kind for India"
             ],
             registrationLink: null,
             capacity: 0,

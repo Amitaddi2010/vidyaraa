@@ -88,7 +88,7 @@ const Survey = () => {
                                 Take the AI Ecosystem <br className="hidden md:block" /> Research Survey
                             </h2>
                             <p className="text-xl text-[#888888] leading-relaxed">
-                                Are you a student, researcher, or educator in J&K? Fill out our comprehensive survey to help us understand the current AI landscape and shape future programs.
+                                Are you a student, researcher, or educator in India? Fill out our comprehensive survey to help us understand the current AI landscape and shape future programs.
                             </p>
                         </div>
 

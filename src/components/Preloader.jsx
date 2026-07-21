@@ -189,7 +189,7 @@ const Preloader = ({ onComplete }) => {
                     >
                         <span>System Core v2.5.0</span>
                         <div className="w-1 h-1 rounded-full" style={{ backgroundColor: 'var(--border-color)' }} />
-                        <span>J&K • India</span>
+                        <span>India</span>
                         <div className="w-1 h-1 rounded-full" style={{ backgroundColor: 'var(--border-color)' }} />
                         <span>Neural Engine Active</span>
                     </motion.div>

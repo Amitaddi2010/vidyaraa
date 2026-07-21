@@ -44,7 +44,7 @@ const Footer = () => {
                         </Link>
 
                         <p className="text-xl leading-relaxed mb-16 max-w-2xl text-center font-medium" style={{ color: 'var(--text-secondary)' }}>
-                            Architecting the future of Artificial Intelligence in Jammu & Kashmir. <br className="hidden md:block" />
+                            Architecting the future of Artificial Intelligence in India. <br className="hidden md:block" />
                             Join the movement to build a self-sustaining innovation hub.
                         </p>
 
@@ -116,7 +116,7 @@ const Footer = () => {
                                 <div className="hidden md:block w-px h-4" style={{ backgroundColor: 'var(--border-color)' }}></div>
                                 <div className="flex items-center gap-2 text-xs font-bold" style={{ color: 'var(--text-secondary)' }}>
                                     <Globe size={14} className="text-orange-500" />
-                                    <span className="tracking-wide">JAMMU & KASHMIR, INDIA</span>
+                                    <span className="tracking-wide">INDIA</span>
                                 </div>
                             </div>
 

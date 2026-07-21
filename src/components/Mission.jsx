@@ -20,14 +20,12 @@ const AnimatedNumber = ({ value, duration = 2 }) => {
     const controls = animate(count, value, { duration, ease: "easeOut" });
     return controls.stop;
   }, [value, duration]);
-        return controls.stop;
-    }, [value, duration]);
 
-    useEffect(() => {
-        return rounded.onChange((latest) => setDisplayValue(latest));
-    }, [rounded]);
+  useEffect(() => {
+    return rounded.onChange((latest) => setDisplayValue(latest));
+  }, [rounded]);
 
-    return displayValue;
+  return displayValue;
 };
 
 const TiltCard = ({ children, className }) => {
@@ -80,7 +78,7 @@ const Mission = () => {
         {
             icon: <Target className="w-6 h-6" style={{ color: 'var(--accent-primary)' }} />,
             title: "Identify & Nurture Talent",
-            description: "Discovering exceptional AI talent across J&K and providing them with world-class resources to grow."
+            description: "Discovering exceptional AI talent across India and providing them with world-class resources to grow."
         },
         {
             icon: <Lightbulb className="w-6 h-6" style={{ color: 'var(--accent-secondary)' }} />,
@@ -116,7 +114,7 @@ const Mission = () => {
                                 Accelerating <span className="text-gradient">AI Innovation</span> in the Valley
                             </h2>
                             <p className="text-lg leading-relaxed max-w-xl" style={{ color: 'var(--text-secondary)' }}>
-                                At Vidyaraa, we believe that the next breakthrough in AI can come from anywhere. Our mission is to build a robust, self-sustaining Artificial Intelligence ecosystem in Jammu & Kashmir.
+                                At Vidyaraa, we believe that the next breakthrough in AI can come from anywhere. Our mission is to build a robust, self-sustaining Artificial Intelligence ecosystem in India.
                             </p>
                         </motion.div>
 

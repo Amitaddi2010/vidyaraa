@@ -188,177 +188,179 @@ const ImageCarousel = () => {
     }, [lightboxImage, lightboxImageIndex, navigateImage]);
 
     return (
-        <div 
-            ref={containerRef}
-            className="relative h-[500px] md:h-[600px] lg:h-[650px] rounded-2xl overflow-hidden"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            onTouchStart={handleTouchStart}
-        >
-            <AnimatePresence mode="wait">
-                <motion.img
-                    key={currentIndex}
-                    src={carouselImages[currentIndex]}
-                    alt={`AI Innovation ${currentIndex + 1}`}
-                    className="w-full h-full cursor-pointer hover:scale-105 transition-transform duration-300"
-                    style={{
-                        objectFit: 'cover',
-                        objectPosition: 'center',
-                        imageRendering: 'auto',
-                        WebkitImageRendering: 'optimize-contrast',
-                        backfaceVisibility: 'hidden',
-                        transform: 'translateZ(0)',
-                        filter: 'contrast(1.1) brightness(1.05)',
-                        willChange: 'transform'
-                    }}
-                    drag="x"
-                    dragConstraints={{ left: 0, right: 0 }}
-                    dragElastic={0.3}
-                    onDragEnd={handleDragEnd}
-                    onClick={() => openLightbox(currentIndex)}
-                    initial={{ opacity: 0, scale: 0.8, x: 100 }}
-                    animate={{ opacity: 1, scale: 1, x: 0 }}
-                    exit={{ opacity: 0, scale: 0.8, x: -100 }}
-                    transition={{ 
-                        type: "spring", 
-                        stiffness: 300, 
-                        damping: 25,
-                        mass: 0.8
-                    }}
-                />
-
-                {/* Zoom Indicator */}
-                <div className="absolute top-4 right-4 bg-black/50 rounded-full p-2 opacity-0 hover:opacity-100 transition-opacity z-10">
-                    <ZoomIn className="w-4 h-4 text-white" />
-                </div>
-            </AnimatePresence>
-
-            {/* Navigation Buttons */}
-            <button
-                onClick={prevImage}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-black/50 transition-colors z-10"
-                aria-label="Previous image"
+        <>
+            <div 
+                ref={containerRef}
+                className="relative h-[500px] md:h-[600px] lg:h-[650px] rounded-2xl overflow-hidden"
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                onTouchStart={handleTouchStart}
             >
-                <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-                onClick={nextImage}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-black/50 transition-colors z-10"
-                aria-label="Next image"
-            >
-                <ChevronRight className="w-5 h-5" />
-            </button>
-
-            {/* Image Indicators */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-                {carouselImages.map((_, index) => (
-                    <button
-                        key={index}
-                        onClick={() => setCurrentIndex(index)}
-                        className={`w-2 h-2 rounded-full transition-all ${
-                            index === currentIndex 
-                                ? 'w-8 bg-white' 
-                                : 'bg-white/50 hover:bg-white/70'
-                        }`}
-                        aria-label={`Go to image ${index + 1}`}
+                <AnimatePresence mode="wait">
+                    <motion.img
+                        key={currentIndex}
+                        src={carouselImages[currentIndex]}
+                        alt={`AI Innovation ${currentIndex + 1}`}
+                        className="w-full h-full cursor-pointer hover:scale-105 transition-transform duration-300"
+                        style={{
+                            objectFit: 'cover',
+                            objectPosition: 'center',
+                            imageRendering: 'auto',
+                            WebkitImageRendering: 'optimize-contrast',
+                            backfaceVisibility: 'hidden',
+                            transform: 'translateZ(0)',
+                            filter: 'contrast(1.1) brightness(1.05)',
+                            willChange: 'transform'
+                        }}
+                        drag="x"
+                        dragConstraints={{ left: 0, right: 0 }}
+                        dragElastic={0.3}
+                        onDragEnd={handleDragEnd}
+                        onClick={() => openLightbox(currentIndex)}
+                        initial={{ opacity: 0, scale: 0.8, x: 100 }}
+                        animate={{ opacity: 1, scale: 1, x: 0 }}
+                        exit={{ opacity: 0, scale: 0.8, x: -100 }}
+                        transition={{ 
+                            type: "spring", 
+                            stiffness: 300, 
+                            damping: 25,
+                            mass: 0.8
+                        }}
                     />
-                ))}
-            </div>
 
-            {/* Auto-play indicator */}
-            <div className="absolute top-4 right-4 z-10">
+                    {/* Zoom Indicator */}
+                    <div className="absolute top-4 right-4 bg-black/50 rounded-full p-2 opacity-0 hover:opacity-100 transition-opacity z-10">
+                        <ZoomIn className="w-4 h-4 text-white" />
+                    </div>
+                </AnimatePresence>
+
+                {/* Navigation Buttons */}
                 <button
-                    onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-                    className="w-8 h-8 rounded-full bg-black/30 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-black/50 transition-colors"
-                    aria-label={isAutoPlaying ? "Pause" : "Play"}
+                    onClick={prevImage}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-black/50 transition-colors z-10"
+                    aria-label="Previous image"
                 >
-                    {isAutoPlaying ? (
-                        <div className="w-3 h-3 flex items-center justify-center">
-                            <div className="w-1 h-3 bg-white rounded-sm mr-1"></div>
-                            <div className="w-1 h-3 bg-white rounded-sm"></div>
-                        </div>
-                    ) : (
-                        <div className="w-0 h-0 border-l-[6px] border-l-white border-y-[3px] border-y-transparent ml-1"></div>
-                    )}
+                    <ChevronLeft className="w-5 h-5" />
                 </button>
-            </div>
-        </div>
-
-        {/* Lightbox */}
-        <AnimatePresence>
-            {lightboxImage && (
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="fixed inset-0 bg-black/90 backdrop-blur-sm z-[1000] flex items-center justify-center"
-                    style={{
-                        position: 'fixed',
-                        top: 0,
-                        left: 0,
-                        width: '100vw',
-                        height: '100vh',
-                        overflow: 'hidden'
-                    }}
-                    onClick={closeLightbox}
+                <button
+                    onClick={nextImage}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-black/50 transition-colors z-10"
+                    aria-label="Next image"
                 >
-                    {/* Previous Button */}
-                    <button
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            navigateImage('prev');
-                        }}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/60 hover:bg-black/80 transition-all hover:scale-110 z-10"
-                        style={{ color: '#ffffff' }}
-                    >
-                        <ChevronLeft className="w-6 h-6" />
-                    </button>
+                    <ChevronRight className="w-5 h-5" />
+                </button>
 
-                    {/* Next Button */}
-                    <button
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            navigateImage('next');
-                        }}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/60 hover:bg-black/80 transition-all hover:scale-110 z-10"
-                        style={{ color: '#ffffff' }}
-                    >
-                        <ChevronRight className="w-6 h-6" />
-                    </button>
-
-                    {/* Image */}
-                    <div onClick={(e) => e.stopPropagation()}>
-                        <img 
-                            src={lightboxImage} 
-                            alt={`AI Innovation image ${lightboxImageIndex + 1}`}
-                            className="max-w-full max-h-[85vh] w-auto h-auto object-contain rounded-lg shadow-2xl"
-                            style={{ 
-                                maxHeight: '85vh',
-                                maxWidth: '90vw'
-                            }}
+                {/* Image Indicators */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                    {carouselImages.map((_, index) => (
+                        <button
+                            key={index}
+                            onClick={() => setCurrentIndex(index)}
+                            className={`w-2 h-2 rounded-full transition-all ${
+                                index === currentIndex 
+                                    ? 'w-8 bg-white' 
+                                    : 'bg-white/50 hover:bg-white/70'
+                            }`}
+                            aria-label={`Go to image ${index + 1}`}
                         />
-                    </div>
-                    
-                    {/* Close Button */}
-                    <button
-                        onClick={closeLightbox}
-                        className="absolute top-4 right-4 p-2 rounded-full bg-black/60 hover:bg-black/80 transition-all hover:scale-110 z-10"
-                        style={{ color: '#ffffff' }}
-                    >
-                        <X className="w-6 h-6" />
-                    </button>
+                    ))}
+                </div>
 
-                    {/* Image Counter */}
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-black/60 backdrop-blur-sm z-10"
-                         style={{ color: '#ffffff' }}>
-                        <span className="text-sm font-medium">
-                            {lightboxImageIndex + 1} / {carouselImages.length}
-                        </span>
-                    </div>
-                </motion.div>
-            )}
-        </AnimatePresence>
+                {/* Auto-play indicator */}
+                <div className="absolute top-4 right-4 z-10">
+                    <button
+                        onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+                        className="w-8 h-8 rounded-full bg-black/30 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-black/50 transition-colors"
+                        aria-label={isAutoPlaying ? "Pause" : "Play"}
+                    >
+                        {isAutoPlaying ? (
+                            <div className="w-3 h-3 flex items-center justify-center">
+                                <div className="w-1 h-3 bg-white rounded-sm mr-1"></div>
+                                <div className="w-1 h-3 bg-white rounded-sm"></div>
+                            </div>
+                        ) : (
+                            <div className="w-0 h-0 border-l-[6px] border-l-white border-y-[3px] border-y-transparent ml-1"></div>
+                        )}
+                    </button>
+                </div>
+            </div>
+
+            {/* Lightbox */}
+            <AnimatePresence>
+                {lightboxImage && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="fixed inset-0 bg-black/90 backdrop-blur-sm z-[1000] flex items-center justify-center"
+                        style={{
+                            position: 'fixed',
+                            top: 0,
+                            left: 0,
+                            width: '100vw',
+                            height: '100vh',
+                            overflow: 'hidden'
+                        }}
+                        onClick={closeLightbox}
+                    >
+                        {/* Previous Button */}
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                navigateImage('prev');
+                            }}
+                            className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/60 hover:bg-black/80 transition-all hover:scale-110 z-10"
+                            style={{ color: '#ffffff' }}
+                        >
+                            <ChevronLeft className="w-6 h-6" />
+                        </button>
+
+                        {/* Next Button */}
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                navigateImage('next');
+                            }}
+                            className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/60 hover:bg-black/80 transition-all hover:scale-110 z-10"
+                            style={{ color: '#ffffff' }}
+                        >
+                            <ChevronRight className="w-6 h-6" />
+                        </button>
+
+                        {/* Image */}
+                        <div onClick={(e) => e.stopPropagation()}>
+                            <img 
+                                src={lightboxImage} 
+                                alt={`AI Innovation image ${lightboxImageIndex + 1}`}
+                                className="max-w-full max-h-[85vh] w-auto h-auto object-contain rounded-lg shadow-2xl"
+                                style={{ 
+                                    maxHeight: '85vh',
+                                    maxWidth: '90vw'
+                                }}
+                            />
+                        </div>
+                        
+                        {/* Close Button */}
+                        <button
+                            onClick={closeLightbox}
+                            className="absolute top-4 right-4 p-2 rounded-full bg-black/60 hover:bg-black/80 transition-all hover:scale-110 z-10"
+                            style={{ color: '#ffffff' }}
+                        >
+                            <X className="w-6 h-6" />
+                        </button>
+
+                        {/* Image Counter */}
+                        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-black/60 backdrop-blur-sm z-10"
+                             style={{ color: '#ffffff' }}>
+                            <span className="text-sm font-medium">
+                                {lightboxImageIndex + 1} / {carouselImages.length}
+                            </span>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </>
     );
 };
 
@@ -369,7 +371,7 @@ const Mission = () => {
         {
             icon: <Target className="w-6 h-6" style={{ color: 'var(--accent-primary)' }} />,
             title: "Identify & Nurture Talent",
-            description: "Discovering exceptional AI talent across J&K and providing them with world-class resources to grow."
+            description: "Discovering exceptional AI talent across India and providing them with world-class resources to grow."
         },
         {
             icon: <Lightbulb className="w-6 h-6" style={{ color: 'var(--accent-secondary)' }} />,
@@ -409,7 +411,7 @@ const Mission = () => {
                             </h2>
                             <p className="text-lg leading-relaxed max-w-xl" 
                                style={{ color: 'var(--text-secondary)' }}>
-                                At Vidyaraa, we believe that the next breakthrough in AI can come from anywhere. Our mission is to build a robust, self-sustaining Artificial Intelligence ecosystem in Jammu & Kashmir.
+                                At Vidyaraa, we believe that the next breakthrough in AI can come from anywhere. Our mission is to build a robust, self-sustaining Artificial Intelligence ecosystem in India.
                             </p>
                         </motion.div>
 

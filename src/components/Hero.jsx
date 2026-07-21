@@ -264,7 +264,7 @@ const Hero = () => {
                     className="mb-8"
                 >
                     <h1 className="text-4xl md:text-5xl lg:text-7xl font-semibold leading-[1.1] tracking-[-0.04em] drop-shadow-2xl" style={{ color: 'var(--text-primary)' }}>
-                        Building the Future of AI<br />in Jammu & Kashmir.
+                        Building the Future of AI<br />in India.
                     </h1>
                 </motion.div>
 

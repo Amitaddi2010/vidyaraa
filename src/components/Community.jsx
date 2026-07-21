@@ -126,7 +126,7 @@ const Community = () => {
                         icon={Instagram}
                         title="Follow on Instagram"
                         color={theme === 'light' ? 'bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600' : 'bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500'}
-                        description="Stay updated with the latest AI news and breakthroughs from J&K."
+                        description="Stay updated with the latest AI news and breakthroughs from India."
                         buttonText="Follow"
                         theme={theme}
                     />

@@ -103,7 +103,7 @@ const Programs = () => {
     const programs = [
         {
             title: "Internships",
-            description: "An intensive 6-month internship program for top students and professionals in J&K.",
+            description: "An intensive 6-month internship program for top students and professionals in India",
             highlights: ["Industry Mentorship", "Hands-on Projects", "Career Support"],
             icon: <Users className="w-8 h-8" style={{ color: theme === 'light' ? '#f97316' : '#c084fc' }} />,
             color: theme === 'light' ? "from-orange-500/10 to-transparent" : "from-purple-500/10 to-transparent",
@@ -117,7 +117,7 @@ const Programs = () => {
         },
         {
             title: "Research Collabs",
-            description: "Partnering with universities to build specialized AI models for J&K.",
+            description: "Partnering with universities to build specialized AI models for India.",
             highlights: ["Open Source", "Paper Publications", "Regional Focus"],
             icon: <Cpu className="w-8 h-8" style={{ color: theme === 'light' ? '#fdba74' : '#60a5fa' }} />,
             color: theme === 'light' ? "from-orange-300/10 to-transparent" : "from-blue-500/10 to-transparent",
@@ -151,7 +151,7 @@ const Programs = () => {
                             Core Initiatives
                         </div>
                         <h2 className="text-5xl md:text-6xl font-black tracking-tighter leading-[1.1]" style={{ color: 'var(--text-primary)' }}>
-                            Structuring J&K's <span className="text-gradient">AI Future</span>
+                            Structuring India's <span className="text-gradient">AI Future</span>
                         </h2>
                         <p className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                             We are building more than just models. We are creating a permanent footprint for structured research, talent nurturing, and industrial growth in the region.

@@ -249,7 +249,7 @@ const Mission = () => {
         {
             icon: <Target className="w-6 h-6" style={{ color: 'var(--accent-primary)' }} />,
             title: "Identify & Nurture Talent",
-            description: "Discovering exceptional AI talent across J&K and providing them with world-class resources to grow."
+            description: "Discovering exceptional AI talent across India and providing them with world-class resources to grow."
         },
         {
             icon: <Lightbulb className="w-6 h-6" style={{ color: 'var(--accent-secondary)' }} />,
@@ -305,7 +305,7 @@ const Mission = () => {
                             >
                                 At Vidyaraa, we believe that the next breakthrough in AI can come from anywhere. 
                                 Our mission is to build a robust, self-sustaining Artificial Intelligence ecosystem 
-                                in Jammu & Kashmir.
+                                in India.
                             </p>
                         </motion.div>
 

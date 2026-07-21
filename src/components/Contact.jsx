@@ -152,7 +152,7 @@ const Contact = () => {
                                 </div>
                                 <div>
                                     <h4 style={{ color: 'var(--text-primary)' }}>Regional Focus</h4>
-                                    <p style={{ color: 'var(--text-muted)' }}>Jammu & Kashmir, India</p>
+                                    <p style={{ color: 'var(--text-muted)' }}>India</p>
                                     <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>Empowering the next generation of AI innovators.</p>
                                 </div>
                             </div>

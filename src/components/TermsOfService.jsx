@@ -76,7 +76,7 @@ const TermsOfService = () => {
                     <section className="p-8 rounded-3xl backdrop-blur-xl" style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--border-color)', borderWidth: '1px', borderStyle: 'solid' }}>
                         <h2 className="text-xl font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>Governing Law</h2>
                         <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
-                            These terms are governed by and construed in accordance with the laws applicable in Jammu & Kashmir, India.
+                            These terms are governed by and construed in accordance with the laws applicable in India.
                         </p>
                     </section>
                 </motion.div>

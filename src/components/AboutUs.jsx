@@ -58,7 +58,7 @@ const AboutUs = () => {
                         </motion.h2>
                         <div className="space-y-6 text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                             <p>
-                                To establish Jammu & Kashmir as a recognized hub for Artificial Intelligence research, talent development, and innovation.
+                                To establish India as a recognized hub for Artificial Intelligence research, talent development, and innovation.
                             </p>
                             <p>
                                 Despite having strong academic institutions and talented students, the region still faces gaps in AI infrastructure, mentorship, and industry exposure. Our goal is to bridge these gaps and create opportunities for the next generation of AI professionals.
@@ -89,11 +89,11 @@ const AboutUs = () => {
                             className="text-5xl md:text-6xl font-black tracking-tighter leading-[1.1]"
                             style={{ color: 'var(--text-primary)' }}
                         >
-                            Structuring J&K's <span className="text-gradient">AI Future</span>
+                            Structuring India's <span className="text-gradient">AI Future</span>
                         </motion.h2>
                         <h4 className="text-3xl font-bold mb-6 tracking-tight" style={{ color: 'var(--text-primary)' }}>Our Vision & Mission</h4>
                         <p className="text-lg leading-relaxed mb-10" style={{ color: 'var(--text-secondary)' }}>
-                            Advancing research, education, and talent in Artificial Intelligence to establish Jammu & Kashmir as a recognized AI hub.
+                            Advancing research, education, and talent in Artificial Intelligence to establish India as a recognized AI hub.
                         </p>
 
                         <div className="grid sm:grid-cols-2 gap-4">
